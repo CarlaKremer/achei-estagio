@@ -34,7 +34,7 @@
         </div>
     </nav>
 
-
+    <main>
     <div class="container">
         <h2 style="font-size: 40px;"> <b>Plano de Estágio Obrigatório</b></h2>
         <div class="row">
@@ -47,8 +47,20 @@
                     semestre = (String) request.getAttribute("SEMESTRE");
             %>
             <div>
-                <p>Há campos a serem preenchidos</p><br>
-                <p><%=erro%></p>
+                <div class="row" id="alert_box">
+                        <div class="col s12 m12">
+                          <div class="card red lighten-1 ">
+                            <div class="row">
+                              <div class="col s12 m10">
+                                <div class="card-content white-text ">
+                                    <p class><%=erro%></p>
+                                    
+                              </div>
+                            </div>
+                          </div>
+                         </div>
+                        </div>
+                </div>
             </div>
             <%}%>
             <form action="ServPlanoEstagio">
@@ -85,7 +97,7 @@
         </div>
 
     </div>
-
+</main>
 
     <footer class="page-footer orange accent-3 ">
 

@@ -35,8 +35,6 @@
             <form action="ServSobreEstagio" method="POST">
             <div class="row col s12">
                 <h3 style="font-size: 30px;"><b>Sobre o Estágio</b></h3>
-                <input id="nomeRepresentante" type="text" class="validate" name="txtNomeRepresentante" required>
-                <label class="black-text" for="nomeRepresentante">Pessoa autorizada para assinatura do TCE</label>
             </div>
             <div class="row col s12">
                 <div class="row col s6">

@@ -11,7 +11,6 @@ package Model;
  */
 public class SobreEstagio {
 
-    private String nomeRepresentante;
     private String inicioEstagio;
     private String fimEstagio;
     private boolean domingo;
@@ -26,14 +25,6 @@ public class SobreEstagio {
     private boolean horasVariadas;
     private String horasSemanais;
 
-
-    public String getNomeRepresentante() {
-        return nomeRepresentante;
-    }
-
-    public void setNomeRepresentante(String nomeRepresentante) {
-        this.nomeRepresentante = nomeRepresentante;
-    }
 
     public String getInicioEstagio() {
         return inicioEstagio;

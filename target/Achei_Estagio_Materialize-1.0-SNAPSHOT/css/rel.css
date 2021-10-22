@@ -1,0 +1,17 @@
+.titulo{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.titulo{
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+}
+.info{
+    padding-left: 6px;
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+}

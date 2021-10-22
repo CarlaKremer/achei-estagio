@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,7 +45,7 @@ public class ServPlanoEstagio extends HttpServlet {
             preencherPlanoEstagio(semestre, atvDesenvolvida);
             redirecionar("impressaoDocEstagio.html", request, response); //avança
         }else{
-            String erro = "Campo Atividade deve ser preenchido.";
+            String erro = "Campo Atividade deve ser preenchido!";
             request.setAttribute("ERRO", erro);
             request.setAttribute("SEMESTRE", String.valueOf(semestre));
             redirecionar("/planoEstagio.jsp", request, response); 
@@ -63,7 +64,13 @@ public class ServPlanoEstagio extends HttpServlet {
         planoEstagio.setAtvDesenvolvida(atvDesenvolvida);
     }
     
+    /*private void obterDadosSessao(HttpServletRequest request){
+        HttpSession session = request.getSession();
+    }*/
         private void redirecionar (String pagina, HttpServletRequest request, HttpServletResponse response){
+            HttpSession session = request.getSession();
+            session.setAttribute("PLANOESTAGIO", planoEstagio);
+            
             RequestDispatcher rd = request.getRequestDispatcher(pagina);
             try{
                 rd.forward(request,response);

@@ -98,11 +98,12 @@ public class ServUnidadeConcedente extends HttpServlet {
     }
     
     private void redirecionar(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        session.setAttribute("UNIDADECONCEDENTE", unidadeConcedente);
+        session.setAttribute("REPRESENTANTE", representante);
+        session.setAttribute("SUPERVISOR",supervisor);
+        
         RequestDispatcher rd = request.getRequestDispatcher("sobreEstagio.jsp");
-        
-       // HttpSession session = request.getSession();
-        //session.setAttibute("");
-        
         try{
             rd.forward(request,response);
         }catch(Exception e){

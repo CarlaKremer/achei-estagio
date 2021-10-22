@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(name = "ServSobreEstagio", urlPatterns = {"/ServSobreEstagio"})
@@ -21,7 +22,6 @@ public class ServSobreEstagio extends HttpServlet {
     SobreEstagio sobreEstagio;
     String destino = "/planoEstagio.jsp";
     private void recebeSobreEstagio(HttpServletRequest request){
-        String nomeRepresentante = request.getParameter("txtNomeRepresentante");
         String inicioEstagio = request.getParameter("dtInicioEstagio");
         String fimEstagio = request.getParameter("dtFimEstagio");
         boolean domingo = Boolean.parseBoolean(request.getParameter("cbDomingo"));
@@ -36,16 +36,15 @@ public class ServSobreEstagio extends HttpServlet {
         boolean horasVariadas = Boolean.parseBoolean(request.getParameter("cbHorasVariadas"));
         String horasSemanais = request.getParameter("hrHorasSemanais");
         
-        preencheDadosSobreEstagio(nomeRepresentante, inicioEstagio, fimEstagio, domingo, segunda, terca, quarta, quinta, sexta, sabado, horaEntrada, horaSaida, horasVariadas, horasSemanais);
+        preencheDadosSobreEstagio(inicioEstagio, fimEstagio, domingo, segunda, terca, quarta, quinta, sexta, sabado, horaEntrada, horaSaida, horasVariadas, horasSemanais);
     
     }
     
-    private void preencheDadosSobreEstagio(String nomeRepresentante, String inicioEstagio, String fimEstagio, boolean domingo,
+    private void preencheDadosSobreEstagio(String inicioEstagio, String fimEstagio, boolean domingo,
                                             boolean segunda,boolean terca, boolean quarta, boolean quinta, boolean sexta, boolean sabado,
                                             String horaEntrada,String horaSaida,boolean horasVariadas,String horasSemanais){
         sobreEstagio = new SobreEstagio();
         
-        sobreEstagio.setNomeRepresentante(nomeRepresentante);
         sobreEstagio.setInicioEstagio(inicioEstagio);
         sobreEstagio.setFimEstagio(fimEstagio);
         sobreEstagio.setDomingo(domingo);
@@ -65,6 +64,9 @@ public class ServSobreEstagio extends HttpServlet {
     }
     
     private void redirecionar(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        session.setAttribute("SOBREESTAGIO", sobreEstagio);
+        
         RequestDispatcher rd = request.getRequestDispatcher(destino);
       
         try{

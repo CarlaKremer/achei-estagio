@@ -9,12 +9,14 @@ import Model.Endereco;
 import Model.Estagiario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.jms.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,7 +30,7 @@ public class dadosPessoais extends HttpServlet {
     
     private void recebeDadosPessoais(HttpServletRequest request){
         
-        int id = Integer.parseInt(request.getParameter("txtId"));
+        String id = request.getParameter("txtId");
         String nome = request.getParameter("txtNome");
         String curso = request.getParameter("comboCurso");
         String cpf = request.getParameter("txtCpf");
@@ -49,7 +51,7 @@ public class dadosPessoais extends HttpServlet {
         //int semestre;
     }
     
-    private void preencherDadosPessoais(int id, String nome, String curso, String cpf, String nascimento,
+    private void preencherDadosPessoais(String id, String nome, String curso, String cpf, String nascimento,
                                         String telefone1, String telefone2, String professor, String disciplina,
                                         String rua, String bairro, String cidade, String cep){
         estagiario = new Estagiario();
@@ -74,6 +76,9 @@ public class dadosPessoais extends HttpServlet {
     }
     
     private void redirecionar(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        session.setAttribute("ESTAGIARIO", estagiario);
+        
         RequestDispatcher rd = request.getRequestDispatcher("unidadeConcedente.jsp");
         
         try {

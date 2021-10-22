@@ -11,7 +11,7 @@ package Model;
  */
 public class Estagiario {
 
-    private int Id;
+    private String id;
     private String nome;
     private String curso;
     private String cpf;
@@ -23,12 +23,12 @@ public class Estagiario {
     private Endereco endereco;
     
     
-    public int getId() {
-        return Id;
+    public String getId() {
+        return id;
     }
 
-    public void setId(int id) {
-        this.Id = Id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNome() {
