@@ -45,7 +45,17 @@ public class Endereco {
     }
 
     public void setCep(String cep) {
-        this.cep = cep;
+        try{
+            if((cep).matches("(^[0-9]{5})-?([0-9]{3}$)")){
+                this.cep = cep;
+            }
+            else{
+                this.cep = null;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
 }

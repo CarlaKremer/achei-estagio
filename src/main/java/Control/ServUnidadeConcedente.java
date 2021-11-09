@@ -11,6 +11,8 @@ import Model.Supervisor;
 import Model.UnidadeConcedente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -88,6 +90,7 @@ public class ServUnidadeConcedente extends HttpServlet {
         representante.setCargo(cargo);
         representante.setRg(rg);
         representante.setCpf(cpf);
+        
     }
     
     private void recebeDadosSupervisor(String nome, String cargo, String email){
@@ -127,21 +130,6 @@ public class ServUnidadeConcedente extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServUnidadeConcedente at " + request.getContextPath() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + unidadeConcedente.getCnpj() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + unidadeConcedente.getRazaoSocial() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + unidadeConcedente.getTelefone1() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + unidadeConcedente.getTelefone2() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + endereco.getBairro() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + endereco.getCep() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + endereco.getCidade() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + endereco.getRua() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + representante.getPessoaAutorizada() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + representante.getCpf() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + representante.getCargo() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + representante.getRg() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + supervisor.getCargo() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + supervisor.getEmail() + "</h1>");
-            //out.println("<h1>Servlet ServUnidadeConcedente at " + supervisor.getNome() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

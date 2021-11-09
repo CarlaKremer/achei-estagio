@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Utilitario.ValidarCpf;
+
 /**
  *
  * @author carla
@@ -32,7 +34,17 @@ public class Representante {
     }
 
     public void setRg(String rg) {
-        this.rg = rg;
+        try{
+            if((rg).matches("(^\\d{1,2}).?(\\d{3}).?(\\d{3})-?(\\d{1}|X|x$)")){
+                this.rg = rg.substring(0,2)+"."+rg.substring(2,5)+"."+rg.substring(5,8)+"-"+rg.subSequence(8, 9);
+            }
+            else{
+                this.rg = ("erro");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public String getCpf() {
@@ -40,7 +52,18 @@ public class Representante {
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        ValidarCpf vc = new ValidarCpf();
+        try {
+            if(vc.isCPF(cpf) == true){
+                this.cpf = vc.imprimeCPF(cpf);
+            }
+            else{
+                System.out.println("");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
    private String pessoaAutorizada;
    private String cargo; 

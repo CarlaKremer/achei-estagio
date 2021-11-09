@@ -24,43 +24,72 @@ public class ServSobreEstagio extends HttpServlet {
     private void recebeSobreEstagio(HttpServletRequest request){
         String inicioEstagio = request.getParameter("dtInicioEstagio");
         String fimEstagio = request.getParameter("dtFimEstagio");
-        boolean domingo = Boolean.parseBoolean(request.getParameter("cbDomingo"));
-        boolean segunda = Boolean.parseBoolean(request.getParameter("cbSegunda"));
-        boolean terca = Boolean.parseBoolean(request.getParameter("cbTerca"));
-        boolean quarta = Boolean.parseBoolean(request.getParameter("cbQuarta"));
-        boolean quinta = Boolean.parseBoolean(request.getParameter("cbQuinta"));
-        boolean sexta = Boolean.parseBoolean(request.getParameter("cbSexta"));
-        boolean sabado = Boolean.parseBoolean(request.getParameter("cbSabado"));
-        String horaEntrada = request.getParameter("hrHoraEntrada");
-        String horaSaida = request.getParameter("txtHoraSaida");
-        boolean horasVariadas = Boolean.parseBoolean(request.getParameter("cbHorasVariadas"));
+        
+        String domingo =request.getParameter("cbDomingo");
+        String segunda =  request.getParameter("cbSegunda");
+        String terca = request.getParameter("cbTerca");
+        String quarta = request.getParameter("cbQuarta");
+        String quinta = request.getParameter("cbQuinta");
+        String sexta = request.getParameter("cbSexta");
+        String sabado = request.getParameter("cbSabado");
+        String diasVariados = request.getParameter("cbDiasVariados");
+        
+        String horaEntrada = request.getParameter("dtHoraEntrada");
+        String horaSaida = request.getParameter("dtHoraSaida");
+        String horasVariadas = request.getParameter("cbHorasVariadas");
         String horasSemanais = request.getParameter("hrHorasSemanais");
         
-        preencheDadosSobreEstagio(inicioEstagio, fimEstagio, domingo, segunda, terca, quarta, quinta, sexta, sabado, horaEntrada, horaSaida, horasVariadas, horasSemanais);
+        double bolsa = 0;
+        if(request.getParameter("txtBolsa") != null){
+            bolsa = Double.parseDouble(request.getParameter("txtBolsa"));
+        }
+        String apolice = request.getParameter("txtApolice");
+        String seguradora = request.getParameter("txtSeguradora");
+        
+        preencheDadosSobreEstagio(inicioEstagio, fimEstagio, diasVariados,horaEntrada, horaSaida,
+                horasVariadas, horasSemanais, segunda, terca, quarta, quinta, sexta,sabado,domingo, bolsa, apolice, seguradora);
     
     }
     
-    private void preencheDadosSobreEstagio(String inicioEstagio, String fimEstagio, boolean domingo,
-                                            boolean segunda,boolean terca, boolean quarta, boolean quinta, boolean sexta, boolean sabado,
-                                            String horaEntrada,String horaSaida,boolean horasVariadas,String horasSemanais){
+    private void preencheDadosSobreEstagio(String inicioEstagio, String fimEstagio, String diasVariados, 
+                                     String horaEntrada,String horaSaida, String horasVariadas,String horasSemanais,
+                                     String segunda, String terca, String quarta, String quinta, String sexta, String sabado, String domingo,
+                                     Double bolsa, String apolice, String seguradora){
         sobreEstagio = new SobreEstagio();
-        
         sobreEstagio.setInicioEstagio(inicioEstagio);
         sobreEstagio.setFimEstagio(fimEstagio);
-        sobreEstagio.setDomingo(domingo);
-        sobreEstagio.setSegunda(segunda);
-        sobreEstagio.setTerca(terca);
-        sobreEstagio.setQuarta(quarta);
-        sobreEstagio.setQuinta(quinta);
-        sobreEstagio.setSexta(sexta);
-        sobreEstagio.setSabado(sabado);
-        sobreEstagio.setHoraEntrada(horaEntrada);
-        sobreEstagio.setHoraEntrada(horaEntrada);
-        sobreEstagio.setHoraSaida(horaSaida);
-        sobreEstagio.setHorasVariadas(horasVariadas);
         sobreEstagio.setHorasSemanais(horasSemanais);
         
+        if (diasVariados != null)
+            sobreEstagio.setDiasVariados(true);
+        else
+            sobreEstagio.setDiasVariados(false);
         
+        if(horasVariadas != null)
+            sobreEstagio.setHorasVariadas(true);
+        else{
+            sobreEstagio.setHorasVariadas(false);
+            sobreEstagio.setHoraEntrada(horaEntrada);
+            sobreEstagio.setHoraSaida(horaSaida);
+        }
+            
+        verificaDia(sabado, 0);
+        verificaDia(domingo, 1);
+        verificaDia(segunda, 2);
+        verificaDia(terca, 3);
+        verificaDia(quarta, 4);
+        verificaDia(quinta, 5);
+        verificaDia(sexta, 6);
+        
+        sobreEstagio.setBolsa(bolsa);
+        sobreEstagio.setApolice(apolice);
+        sobreEstagio.setSeguradora(seguradora);
+    }
+    
+    private void verificaDia(String dia, int valor){
+        if (dia != null){
+            sobreEstagio.setDiaSemana(valor);
+        }
     }
     
     private void redirecionar(HttpServletRequest request, HttpServletResponse response){

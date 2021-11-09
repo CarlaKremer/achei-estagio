@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -64,22 +64,18 @@ public class ServPlanoEstagio extends HttpServlet {
         planoEstagio.setAtvDesenvolvida(atvDesenvolvida);
     }
     
-    /*private void obterDadosSessao(HttpServletRequest request){
+    private void redirecionar (String pagina, HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-    }*/
-        private void redirecionar (String pagina, HttpServletRequest request, HttpServletResponse response){
-            HttpSession session = request.getSession();
-            session.setAttribute("PLANOESTAGIO", planoEstagio);
-            
-            RequestDispatcher rd = request.getRequestDispatcher(pagina);
-            try{
-                rd.forward(request,response);
-            }catch(Exception e){
-                e.printStackTrace();
-                System.out.println("deu erro bobona");
-            }
-            
+        session.setAttribute("PLANOESTAGIO", planoEstagio);
+
+        RequestDispatcher rd = request.getRequestDispatcher(pagina);
+        try{
+            rd.forward(request,response);
+        }catch(Exception e){
+            e.printStackTrace();
         }
+
+    }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

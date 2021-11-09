@@ -9,7 +9,6 @@ import Model.Endereco;
 import Model.Estagiario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.jms.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,11 +44,9 @@ public class dadosPessoais extends HttpServlet {
         String cidade = request.getParameter("txtCidade");
         String cep = request.getParameter("txtCep");
         
-        preencherDadosPessoais(id, nome, curso, cpf, nascimento, telefone1, telefone2, professor, disciplina, 
-                                rua ,bairro, cidade, cep);
-
-        //int semestre;
+        preencherDadosPessoais(id, nome, curso, cpf, nascimento, telefone1, telefone2, professor, disciplina, rua ,bairro, cidade, cep);
     }
+    
     
     private void preencherDadosPessoais(String id, String nome, String curso, String cpf, String nascimento,
                                         String telefone1, String telefone2, String professor, String disciplina,
@@ -73,17 +70,18 @@ public class dadosPessoais extends HttpServlet {
         this.endereco.setCep(cep);
         
         estagiario.setEndereco(this.endereco);
+        
     }
     
     private void redirecionar(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         session.setAttribute("ESTAGIARIO", estagiario);
         
-        RequestDispatcher rd = request.getRequestDispatcher("unidadeConcedente.jsp");
         
-        try {
-            rd.forward(request, response);
-        } catch(Exception e ){
+       RequestDispatcher rd = request.getRequestDispatcher("unidadeConcedente.jsp");
+       try{
+            rd.forward(request,response);
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -93,7 +91,6 @@ public class dadosPessoais extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         recebeDadosPessoais(request);
-        
         redirecionar(request, response);
 
         try ( PrintWriter out = response.getWriter()) {
@@ -105,7 +102,7 @@ public class dadosPessoais extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet dadosPessoais at " + request.getContextPath() + "</h1>");
-            out.println("<h1>Servlet dadosPessoais at " + estagiario.getId() + "</h1>");
+            out.println("<h1>Servlet dadosPessoais at "  + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

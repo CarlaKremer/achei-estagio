@@ -1,3 +1,4 @@
+<%@page import="Model.Estagiario"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,32 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achei Estágio</title>
+     <link rel= "shortcut icon" href= "Imagens/imgLogo.ico " type= "image/x-icon">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/fonte.css">
 </head>
 
 <body>
+    <!--navbar--->
     <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">one</a></li>
-        <li><a href="#!">two</a></li>
-        <li class="divider"></li>
-        <li><a href="#!">three</a></li>
+    <ul id= "dropdown1" class="dropdown-content">
+        <li><a href="dadosPessoais.jsp">Estágio Obrigatório</a></li>
+        <li><a href="dadosPessoaisNaoObr.jsp">Estágio Não-Obrigatório</a></li>
     </ul>
-    <nav>
-        <div class="nav-wrapper orange accent-3">
-            <a href="#!" class="brand-logo">Achou Estágio</a>
+    <nav class="nav-wrapper orange accent-3">
+        <div class="nav-wrapper ">
+            <img src="Imagens/imgLogo.png " style="height: 60px; " alt=" ">
+            <a href="index.html" class="brand-logo ">Achei Estágio</a>
+
             <ul class="right hide-on-med-and-down">
-                <li><a href="index.html ">Home</a></li>
-                <li><a href="badges.html">Documentação Final</a></li>
+                <li><a href="#">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
-                <li>
-                    <a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right"></i></a>
-                </li>
-            </ul>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
+              </ul>
         </div>
     </nav>
+    <!--navbar--->
     <div class="container">
 
         <form action="ServUnidadeConcedente" method="POST">
@@ -63,15 +65,15 @@
             </div>
             <div class="row">
                 <div class="row col s3">
-                    <input id="cepEmpresa" type="text" class="validate" name="txtCep" required>
+                    <input id="cepEmpresa" maxlength="8" type="text" class="validate" name="txtCep" required>
                     <label class="black-text" for="enderecoAluno">CEP</label>
                 </div>
                 <div class="row col s4">
-                    <input id="telefone1Empresa" type="text" class="validate" name="txtTelefoneUnidade1" required>
+                    <input id="telefone1Empresa" maxlength="15" type="text" class="validate" name="txtTelefoneUnidade1" required>
                     <label class="black-text" for="bairroAluno">Telefone 1</label>
                 </div>
                 <div class="row  col s4">
-                    <input id="telefone2Empresa" type="text" class="validate" name="txtTelefoneUnidade2" required>
+                    <input id="telefone2Empresa" maxlength="15" type="text" class="validate" name="txtTelefoneUnidade2" required>
                     <label class="black-text" for="cidadeAluno">Telefone 2</label>
                 </div>
             </div>
@@ -86,11 +88,11 @@
                     <label class="black-text" for="cargoRepresentante">Cargo</label>
                 </div>
                 <div class="row col s4">
-                    <input id="rgRepresentante" type="text" class="validate" name="txtRgRepresentante" required>
-                    <label class="black-text" for="rgRepresentante">RG</label>
+                    <input id="rgRepresentante" maxlength="9" type="text" class="validate" name="txtRgRepresentante" required>
+                    <label class="black-text" for="rgRepresentante">RG (sem pontuação) </label>
                 </div>
                 <div class="row  col s4">
-                    <input id="cpfRepresentante" type="text" class="validate" name="txtCpfRepresentante" required>
+                    <input id="cpfRepresentante" maxlength="11" type="text" class="validate" name="txtCpfRepresentante" required>
                     <label class="black-text" for="cpfRepresentante">CPF</label>
                 </div>
             </div>
@@ -110,7 +112,6 @@
                 </div>
             </form>
             </div>
-            <!--<a class="waves-effect waves-light btn orange accent-3" href="sobreEstagio.html"><i class="material-icons left"></i>Avançar >>></a>-->
             <button class="waves-effect waves-light btn orange accent-3" type="submit" >Avançar</button>
         </div>
 
@@ -118,14 +119,8 @@
 
 
     </div>
-    <footer class="page-footer orange accent-3 ">
-
-        <div class="footer-copyright">
-            <div class="container">
-                © 2014 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-        </div>
+    <footer class="page-footer orange accent-3 center" style="padding-top: 0px;">
+            © 2021 Copyright Text
     </footer>
     <script>
         M.AutoInit();
@@ -138,6 +133,39 @@
 
     <script>
         $(".dropdown-trigger").dropdown();
+    </script>
+    <script>
+          document.getElementById('cnpjEmpresa').addEventListener('input', function (e) {
+          var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})/);
+          e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
+    });
+    </script>
+    <script>
+        function mascaraTel(o,f){
+            v_obj=o;
+            v_fun=f;
+            setTimeout("execmascaraTel()",1);
+        }
+        function execmascaraTel(){
+            v_obj.value=v_fun(v_obj.value);
+        }
+        function mtel(v){
+            v=v.replace(/\D/g,""); //Remove tudo o que não é dígito
+            v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+            v=v.replace(/(\d)(\d{4})$/,"$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+            return v;
+        }
+        function id( el ){
+                return document.getElementById( el );
+        }
+        window.onload = function(){
+                id('telefone1Empresa').onkeyup = function(){
+                        mascaraTel( this, mtel );
+                }
+                id('telefone2Empresa').onkeyup = function(){
+                        mascaraTel( this, mtel );
+                }
+        }
     </script>
 </body>
 

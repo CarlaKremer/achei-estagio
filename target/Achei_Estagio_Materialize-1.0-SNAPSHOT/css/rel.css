@@ -1,17 +1,26 @@
-.titulo{
-    font-size: 20px;
+.tipo{
+    font-size: 15px;
+    color: black;
     font-weight: bold;
-    text-align: center;
+    
 }
 
 .titulo{
     color: black;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
+    text-align: center;
 }
 .info{
     padding-left: 6px;
     color: black;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 10px;
+    text-align: center;
 }
+
+.row{
+    margin-bottom: 10px !important;
+}
+
+

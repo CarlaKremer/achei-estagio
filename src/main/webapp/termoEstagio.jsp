@@ -1,37 +1,73 @@
+<%-- 
+    Document   : termoEstagio
+    Created on : 29 de out de 2021, 18:12:43
+    Author     : carla
+--%>
+
+<%@page import="Model.Supervisor"%>
+<%@page import="Model.SobreEstagio"%>
+<%@page import="Model.Representante"%>
+<%@page import="Model.UnidadeConcedente"%>
+<%@page import="Model.Estagiario"%>
+<%@page import="Model.PlanoEstagio"%>
+<%@page import="Model.Estagiario"%>
+<%@page import="Model.Estagiario"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
+<%
+    Estagiario estagiario;
+    Representante representante;
+    Supervisor supervisor;
+    UnidadeConcedente unidadeConcedente;
+    SobreEstagio sobreEstagio;
+    
+    HttpSession sessao = request.getSession();
+    estagiario = (Estagiario) sessao.getAttribute("ESTAGIARIO");
+    representante = (Representante) sessao.getAttribute("REPRESENTANTE");
+    supervisor = (Supervisor) sessao.getAttribute("SUPERVISOR");
+    unidadeConcedente = (UnidadeConcedente) sessao.getAttribute("UNIDADECONCEDENTE");
+    sobreEstagio = (SobreEstagio) sessao.getAttribute("SOBREESTAGIO");
+%>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achei Estágio</title>
+     <link rel= "shortcut icon" href= "Imagens/imgLogo.ico " type= "image/x-icon">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+    @media print {
+        header, footer, nav, aside, .button {
+           display: none;
+        }
+     }
+    </style>
+    <link rel="stylesheet" href="css/fonte.css">
 </head>
 
 <body>
+    <!--navbar--->
     <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content ">
-        <li><a href="#! ">one</a></li>
-        <li><a href="#! ">two</a></li>
-        <li class="divider "></li>
-        <li><a href="#! ">three</a></li>
+    <ul id= "dropdown1" class="dropdown-content">
+        <li><a href="dadosPessoais.jsp">Estágio Obrigatório</a></li>
+        <li><a href="dadosPessoaisNaoObr.jsp">Estágio Não-Obrigatório</a></li>
     </ul>
-    <nav>
-        <div class="nav-wrapper orange accent-3 ">
-            <a href="#! " class="brand-logo ">Achou Estágio</a>
-            <ul class="right hide-on-med-and-down ">
-                <li><a href="index.html ">Home</a></li>
-                <li><a href="badges.html ">Documentação Final</a></li>
+    <nav class="nav-wrapper orange accent-3">
+        <div class="nav-wrapper ">
+            <img src="Imagens/imgLogo.png " style="height: 60px; " alt=" ">
+            <a href="index.html" class="brand-logo ">Achei Estágio</a>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
-                <li>
-                    <a class="dropdown-trigger " href="#! " data-target="dropdown1 ">Requerimentos<i class="material-icons right "></i></a>
-                </li>
-            </ul>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
+              </ul>
         </div>
     </nav>
+    <!--navbar--->
     <div class="container ">
 
 
@@ -42,115 +78,118 @@
                 sede na <b>Rua Irmã Arminda, 10-50, Jd. Brasil, Bauru/SP, CEP: 17011-160,</b> fone: (14) 2107-7000, site: www.unisagrado.edu.br, neste ato representado por Flavia Dias Gomes, assistente administrativo.</h3>
 
 
-            <h3 style="font-size: 30px; "><b>Concedente do Estágio</b></h3>
-            <div class="row ">
-                <div class="row col s12 ">
-                    <input id="nomeEmpresa " type="text " class="validate ">
-                    <label class="black-text " for="nomeEmpresa ">Razão Social</label>
-                </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th><h5>Concedente do Estágio</h5></th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    <tr>
+                        <td><b>Razão Social:</b></td>
+                        <td><%=unidadeConcedente.getRazaoSocial()%></td>
+                        <td><b></b></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        
+                        <td><b>Endereço</b></td>
+                        <td><%=unidadeConcedente.getEndereco().getRua()%></td>
+                        <td><b>Bairro</b></td>
+                        <td><%=unidadeConcedente.getEndereco().getBairro()%></td>
+                    </tr>
+                    <tr>
+                        <td><b>CEP:</b></td>
+                        <td><%=unidadeConcedente.getEndereco().getCep()%></td>
+                        <td><b>Fone:</b></td>
+                        <td><%=unidadeConcedente.getTelefone1()%></td>
+                    </tr>
+                    <tr>
+                        <td><b>CNPJ:</b></td>
+                        <td><%=unidadeConcedente.getCnpj()%></td>
+                        <td><b>Cidade/UF:</b></td>
+                        <td><%=unidadeConcedente.getEndereco().getCidade()%></td>
+                    </tr>
+                    <tr>
+                        <td><b>Representada por:</b></td>
+                        <td><%=representante.getPessoaAutorizada()%></td>
+                        <td><b>Cargo:</b></td>
+                        <td><%=representante.getCargo()%></td>
+                    </tr>
+                    <tr>
+                        <td><b>Responsável pelo estagiário na empresa <br> (Supervisor Local):</b></td>
+                        <td><%=supervisor.getNome()%></td>
+                        <td><b>Cargo:</b></td>
+                        <td><%=supervisor.getCargo()%></td>
+                    </tr>
+                    <tr>
+                        <td><b>E-mail:</b></td>
+                        <td><%=supervisor.getEmail()%></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br><br>
+            <table>
+                <thead>
+                    <th>
+                        <h5>Estagiário</h5>
+                    </th>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td><b>Nome:</b></td>
+                        <td><%=estagiario.getNome()%></td>
+                    </tr>
+                    <tr>
+                        <td><b>Endereço:</b></td>
+                        <td><%=estagiario.getEndereco().getRua()%></td>
+                        <td><b>Cidade/UF:</b></td>
+                        <td><%=estagiario.getEndereco().getCidade()%></td>
+                    </tr>
+                    <tr>
+                        <td><b>Fone:</b></td>
+                        <td><%=estagiario.getTelefone1()%></td>
+                    </tr>
+                    <tr>
+                        <td><b>Curso:</b></td>
+                        <td><%=estagiario.getCurso()%></td>
+                    </tr>
+                    <tr>
+                        <%if(estagiario.getDisciplina()!= null){%>
+                        <td><b>Estágio:</b></td>
+                        <td><%=estagiario.getDisciplina()%></td>
+                        <%}%>
+                    </tr>
+                    
+                </tbody>
 
-            </div>
-            <div class="row ">
-                <div class="row col s12 ">
-                    <div class="row col s3 ">
-                        <input id="cnpjEmpresa " type="text " class="validate ">
-                        <label class="black-text " for="cnpj ">CNPJ</label>
-                    </div>
-                    <div class="row col s3 ">
-                        <input id="cepEmpresa " type="text " class="validate ">
-                        <label class="black-text " for="cnpj ">CEP</label>
-                    </div>
-                    <div class="row col s3 ">
-                        <input id="bairroEmpresa " type="text " class="validate ">
-                        <label class="black-text " for="cnpj ">Bairro</label>
-                    </div>
-                    <div class="row col s3 ">
-                        <input id="cidadeEmpresa " type="text " class="validate ">
-                        <label class="black-text " for="cidadeAluno ">Cidade</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row ">
-                <div class="row col s12 ">
-
-                    <div class="row col s4 ">
-                        <input id="representanteEmpresa " type="text " class="validate ">
-                        <label class="black-text " for="representanteEmpresa ">Representada por</label>
-                    </div>
-                    <div class="row col s4 ">
-                        <input id="representanteCargo " type="text " class="validate ">
-                        <label class="black-text " for="representanteCargo ">Cargo</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="row col s12 ">
-
-                    <div class="row col s4 ">
-                        <input id="supervisorEstagio " type="text " class="validate ">
-                        <label class="black-text " for="supervisorEstagio ">Responsável pelo estagiário na empresa (Supervisor Local)</label>
-                    </div>
-                    <div class="row col s4 ">
-                        <input id="supervisorCargo " type="text " class="validate ">
-                        <label class="black-text " for="supervisorCargo ">Cargo</label>
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="font-size: 30px; "><b>Estagiário(a)</b></h3>
-            <div class="row ">
-                <div class="row col s12 ">
-                    <input id="nomeAluno " type="text " class="validate ">
-                    <label class="black-text " for="nomeAluno ">Nome</label>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="row col s12 ">
-                    <div class="row ">
-                        <div class="row col s12 ">
-                            <div class="row col s3 ">
-                                <input id="enderecoAluno " type="text " class="validate ">
-                                <label class="black-text " for="cnpj ">Endereço</label>
-                            </div>
-                            <div class="row col s3 ">
-                                <input id="cepAluno " type="text " class="validate ">
-                                <label class="black-text " for="cnpj ">CEP</label>
-                            </div>
-                            <div class="row col s3 ">
-                                <input id="bairroAluno " type="text " class="validate ">
-                                <label class="black-text " for="cnpj ">Bairro</label>
-                            </div>
-                            <div class="row col s3 ">
-                                <input id="cidadeAluno " type="text " class="validate ">
-                                <label class="black-text " for="cidadeAluno ">Cidade</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="row col s12 ">
-                            <div class="row col s3 ">
-                                <input id="telefoneAluno " type="text " class="validate ">
-                                <label class="black-text " for="cnpj ">Telefone</label>
-                            </div>
-                            <div class="row col s3 ">
-                                <input id="cursoAluno " type="text " class="validate ">
-                                <label class="black-text " for="cnpj ">Curso</label>
-                            </div>
-                            <div class="row col s3 ">
-                                <input id="estagioAluno " type="text " class="validate ">
-                                <label class="black-text " for="cnpj ">Estágio</label>
-                            </div>
-
-                        </div>
-                    </div>
+            </table>
                     <p>Celebram entre si este TERMO DE COMPROMISSO DE ESTÁGIO OBRIGATÓRIO, convencionando as cláusulas e condições seguintes:</p>
                     <p><b>CLÁUSULA 1ª –</b>Este instrumento tem por objetivo formalizar as condições básicas para a realização de estágio de estudante, com interveniência e assinatura da INSTITUIÇÃO DE ENSINO e particularizar a relação jurídica especial
                         existente entre o(a) ESTUDANTE e a CONCEDENTE, caracterizando a não vinculação empregatícia, nos termos da legislação vigente.</p>
                     <p><b>CLÁUSULA 2ª –</b>O referido <b>estágio obrigatório</b> é de interesse curricular e pedagogicamente útil, entendido o estágio como uma atividade de aprendizagem social, profissional e cultural, compatíveis com o contexto básico da
                         profissão, ao qual seu curso se refere e integra o Processo de Ensino Aprendizagem, nos termos da Lei 11.788/08 e da Lei nº. 9.394/96 (Diretrizes e Bases da Educação Nacional) e sua regulamentação.</p>
-                    <p><b>CLÁUSULA 3ª –</b>Ficam compromissadas entre as partes as seguintes condições para a realização do Estágio: a) As atividades de estágio a serem cumpridas pelo(a) estagiário(a) serão desenvolvidas pelo período de: _______ até ________
-                        , podendo ser prorrogada dentro do semestre, nos termos da Cláusula 10ª do presente termo. b) Dias da semana: __________ . Horário: ___________ , totalizando ______ semanais, de forma compatível com o horário escolar do(a) estagiário(a).
+                    <p><b>CLÁUSULA 3ª –</b>Ficam compromissadas entre as partes as seguintes condições para a realização do Estágio: a) As atividades de estágio a serem cumpridas pelo(a) estagiário(a) serão desenvolvidas pelo período de:<%=sobreEstagio.getInicioEstagio()%> até <%=sobreEstagio.getFimEstagio()%>
+                        , podendo ser prorrogada dentro do semestre, nos termos da Cláusula 10ª do presente termo. b) Dias da semana: <%
+                        String [] diasSemana = {"Sábado","Domingo","Segunda-Feira","Terca-Feira","Quarta-Feira", "Quinta-Feira","Sexta-Feira"};
+                        
+                        if (sobreEstagio.isDiasVariados())
+                            out.print("Dias Variados");
+                        else{
+                            for (int i = 0; i < sobreEstagio.getDiasSemana().length; i++) {
+                                    if(sobreEstagio.getDiasSemana()[i]){
+                                        out.print(diasSemana[i] + " | ");
+                                    }
+                                }
+                        }
+                    %>. Horário:<%
+                            if(sobreEstagio.isHorasVariadas())
+                                out.print("Horários Variados");
+                            else
+                                out.print("De "+ sobreEstagio.getHoraEntrada() + " até " + sobreEstagio.getHoraSaida());
+                        %>, totalizando <%=sobreEstagio.getHorasSemanais()%> semanais, de forma compatível com o horário escolar do(a) estagiário(a).
                         c) Fica sob o encargo da INSTITUIÇÃO DE ENSINO, nos termos do art. 9º., IV e parágrafo único da Lei 11.788/08, a efetivação de contrato de seguro para acidentes pessoais ao(a) estagiário(a), conforme Apólice de Seguro nº: 2000683-
                         Seguradora/Corretora: Delcossa Acidentes Pessoais. d) Atividades do estágio: em anexo.</p>
                     <p><b>CLÁUSULA 4ª –</b> Durante a realização do presente
@@ -200,44 +239,40 @@
                     <p>Bauru,______ de _________ de ________.</p>
 
                 </div>
+                    
                 <div class="row center ">
-
-                    <p><b>IASCJ - CENTRO UNIVERSITÁRIO SAGRADO CORAÇÃO - UNISAGRADO</b></p>
-                    <p>FLÁVIA DIAS GOMES</p>
-                    <p>ASSISTENTE ADMINISTRATIVO</p>
-                    <p><b>EMPRESA</b></p>
-                    <p>Representante</p>
-                    <p>Cargo</p>
-                </div>
-                <div class="row center ">
-                    <p><b>Estagiário</b></p>
-                    <div class="row ">
-                        <p>_____________________________________________________________________</p>
-                        <p><b>1ª Testemunha</b></p>
-                        <p>CPF/MF:_____________________________________________________________________</p>
-                    </div>
-                    <div class="row ">
-                        <p>_____________________________________________________________________</p>
-                        <p><b>2ª Testemunha</b></p>
-                        <p>CPF/MF:_____________________________________________________________________</p>
+                    <div class="col s6">
+                        <p><b>IASCJ - CENTRO UNIVERSITÁRIO SAGRADO CORAÇÃO - UNISAGRADO</b></p>
+                        <p>FLÁVIA DIAS GOMES</p>
+                        <p>ASSISTENTE ADMINISTRATIVO</p><br><br>
+                        <p><b><%=estagiario.getNome()%></b></p>
                     </div>
 
-                </div>
+                    <div class="col s6">
+                        <p><b><%=unidadeConcedente.getRazaoSocial()%></b></p>
+                    <p><%=representante.getPessoaAutorizada()%></p>
+                    <p><%=representante.getCargo()%></p>
+                    </div>
             </div>
-
-
-
-
+            <div class="row center ">
+                 <div class="col s6">
+                         <p>_____________________________________________________________________</p>
+                        <p><b>1ª Testemunha</b></p>
+                        <p>CPF/MF:__________________________________________________</p>
+                    </div>
+                <div class="col s6">
+                     <p>_____________________________________________________________________</p>
+                        <p><b>2ª Testemunha</b></p>
+                        <p>CPF/MF:__________________________________________________</p>
+                    </div>
+            </div>
+        <div class="container button ">
+            <button onclick="window.print()" class="waves-effect waves-light btn orange accent-3" >Imprimir</button><br><br>
+        </div>
         </div>
     </div>
-    <footer class="page-footer orange accent-3 ">
-
-        <div class="footer-copyright ">
-            <div class="container ">
-                © 2014 Copyright Text
-                <a class="grey-text text-lighten-4 right " href="#! ">More Links</a>
-            </div>
-        </div>
+    <footer class="page-footer orange accent-3 center" style="padding-top: 0px;">
+            © 2021 Copyright Text
     </footer>
     <script>
         M.AutoInit();

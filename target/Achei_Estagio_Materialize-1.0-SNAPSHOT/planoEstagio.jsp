@@ -7,32 +7,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achei Estágio</title>
-
+     <link rel= "shortcut icon" href= "Imagens/imgLogo.ico " type= "image/x-icon">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/fonte.css">
 
 </head>
 
 <body>
+    <!--navbar--->
     <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">one</a></li>
-        <li><a href="#!">two</a></li>
-        <li class="divider"></li>
-        <li><a href="#!">three</a></li>
+    <ul id= "dropdown1" class="dropdown-content">
+        <li><a href="dadosPessoais.jsp">Estágio Obrigatório</a></li>
+        <li><a href="dadosPessoaisNaoObr.jsp">Estágio Não-Obrigatório</a></li>
     </ul>
-    <nav>
-        <div class="nav-wrapper orange accent-3">
-            <a href="#!" class="brand-logo">Achei Estágio</a>
+    <nav class="nav-wrapper orange accent-3">
+        <div class="nav-wrapper ">
+            <img src="Imagens/imgLogo.png " style="height: 60px; " alt=" ">
+            <a href="index.html" class="brand-logo ">Achei Estágio</a>
+
             <ul class="right hide-on-med-and-down">
-                <li><a href="index.html ">Home</a></li>
-                <li><a href="badges.html">Documentação Final</a></li>
+                <li><a href="#">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right"></i></a></li>
-            </ul>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
+              </ul>
         </div>
     </nav>
+    <!--navbar--->
 
     <main>
     <div class="container">
@@ -48,18 +51,18 @@
             %>
             <div>
                 <div class="row" id="alert_box">
-                        <div class="col s12 m12">
-                          <div class="card red lighten-1 ">
-                            <div class="row">
-                              <div class="col s12 m10">
-                                <div class="card-content white-text ">
-                                    <p class><%=erro%></p>
-                                    
-                              </div>
-                            </div>
+                    <div class="col s12 m12">
+                      <div class="card red lighten-1 ">
+                        <div class="row">
+                          <div class="col s12 m10">
+                            <div class="card-content white-text ">
+                                <p class><%=erro%></p>
+
                           </div>
-                         </div>
                         </div>
+                      </div>
+                     </div>
+                    </div>
                 </div>
             </div>
             <%}%>
@@ -73,8 +76,6 @@
                         <%}else{%>
                         <option value="<%=i%>" ><%=i%>º Semestre</option>
                     <%
-                        System.out.println("jsp:"+semestre);
-                        System.out.println("jsp:"+erro);
                             }
                         }
                     %>
@@ -93,20 +94,13 @@
                 </div>
                 </form>
             </div>
-            <a class="waves-effect waves-light btn orange accent-3" href="impressaoDocEstagio.html"><i class="material-icons left"></i>Enviar >>></a>
         </div>
 
     </div>
 </main>
 
-    <footer class="page-footer orange accent-3 ">
-
-        <div class="footer-copyright ">
-            <div class="container ">
-                © 2014 Copyright Text
-                <a class="grey-text text-lighten-4 right " href="#! ">More Links</a>
-            </div>
-        </div>
+        <footer class="page-footer orange accent-3 center" style="padding-top: 0px;">
+            © 2021 Copyright Text
     </footer>
     <script>
         M.AutoInit();
@@ -125,6 +119,7 @@
             $('select').formSelect();
         });
     </script>
+   
 </body>
 
 </html>

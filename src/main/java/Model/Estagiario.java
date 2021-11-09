@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 package Model;
+import Utilitario.ValidarCpf;
 
 /**
  *
  * @author carla
  */
 public class Estagiario {
+
+    
 
     private String id;
     private String nome;
@@ -22,6 +25,15 @@ public class Estagiario {
     private String disciplina;
     private Endereco endereco;
     
+    private String parametro;
+    
+    public String getParametro() {
+        return parametro;
+    }
+
+    public void setParametro(String parametro) {
+        this.parametro = parametro;
+    }
     
     public String getId() {
         return id;
@@ -50,9 +62,23 @@ public class Estagiario {
     public String getCpf() {
         return cpf;
     }
+    
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        ValidarCpf vc = new ValidarCpf();
+        try {
+            if(vc.isCPF(cpf) == true){
+                //this.cpf = vc.imprimeCPF(cpf);
+                this.cpf = cpf;
+            }
+            else{
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
     }
 
     public String getNascimento() {
@@ -77,6 +103,7 @@ public class Estagiario {
 
     public void setTelefone2(String telefone2) {
         this.telefone2 = telefone2;
+            
     }
 
     public String getProfessor() {

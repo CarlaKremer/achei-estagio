@@ -11,20 +11,55 @@ package Model;
  */
 public class SobreEstagio {
 
+    
     private String inicioEstagio;
     private String fimEstagio;
-    private boolean domingo;
-    private boolean segunda;
-    private boolean terca;
-    private boolean quarta;
-    private boolean quinta;
-    private boolean sexta;
-    private boolean sabado;
+    
+    private boolean[] diasSemana; //seta null
+    private boolean diasVariados;
+   
     private String horaEntrada;
     private String horaSaida;
+    
     private boolean horasVariadas;
     private String horasSemanais;
+    
+    private double bolsa;
+    private String apolice;
+    private String seguradora;
+    
+    public SobreEstagio(){
+        inicializaDias();
+    }
+    
+    public void inicializaDias(){
+        //0 - sabado ...
+        //6 - sexta
+        
+        //inicializaVetor
+        setDiasSemana(new boolean[7]);
+        
+        //for i + tab
+        for (int i=0; i < getDiasSemana().length; i++){
+            getDiasSemana()[i] = false; //coloca falso para todo os dias
+        }
+    }   
 
+    public boolean[] getDiasSemana() {
+        return diasSemana;
+    }
+
+    public void setDiasSemana(boolean[] diasSemana) {
+        this.diasSemana = diasSemana;
+    }
+
+    public boolean isDiasVariados() {
+        return diasVariados;
+    }
+
+    public void setDiasVariados(boolean diasVariados) {
+        this.diasVariados = diasVariados;
+    }
 
     public String getInicioEstagio() {
         return inicioEstagio;
@@ -40,62 +75,6 @@ public class SobreEstagio {
 
     public void setFimEstagio(String fimEstagio) {
         this.fimEstagio = fimEstagio;
-    }
-
-    public boolean isDomingo() {
-        return domingo;
-    }
-
-    public void setDomingo(boolean domingo) {
-        this.domingo = domingo;
-    }
-
-    public boolean isSegunda() {
-        return segunda;
-    }
-
-    public void setSegunda(boolean segunda) {
-        this.segunda = segunda;
-    }
-
-    public boolean isTerca() {
-        return terca;
-    }
-
-    public void setTerca(boolean terca) {
-        this.terca = terca;
-    }
-
-    public boolean isQuarta() {
-        return quarta;
-    }
-
-    public void setQuarta(boolean quarta) {
-        this.quarta = quarta;
-    }
-
-    public boolean isQuinta() {
-        return quinta;
-    }
-
-    public void setQuinta(boolean quinta) {
-        this.quinta = quinta;
-    }
-
-    public boolean isSexta() {
-        return sexta;
-    }
-
-    public void setSexta(boolean sexta) {
-        this.sexta = sexta;
-    }
-
-    public boolean isSabado() {
-        return sabado;
-    }
-
-    public void setSabado(boolean sabado) {
-        this.sabado = sabado;
     }
 
     public String getHoraEntrada() {
@@ -129,5 +108,38 @@ public class SobreEstagio {
     public void setHorasSemanais(String horasSemanais) {
         this.horasSemanais = horasSemanais;
     }
+
+    /*private String formataData(String date){
+    ManipulaData md = new ManipulaData();
+    }*/
+    
+    public void setDiaSemana(int dia){
+        diasSemana[dia] = true; //
+    }
+    
+    public double getBolsa() {
+        return bolsa;
+    }
+
+    public void setBolsa(double bolsa) {
+        this.bolsa = bolsa;
+    }
+
+    public String getApolice() {
+        return apolice;
+    }
+
+    public void setApolice(String apolice) {
+        this.apolice = apolice;
+    }
+
+    public String getSeguradora() {
+        return seguradora;
+    }
+
+    public void setSeguradora(String seguradora) {
+        this.seguradora = seguradora;
+    }
     
 }
+

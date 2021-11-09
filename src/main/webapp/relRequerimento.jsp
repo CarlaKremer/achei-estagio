@@ -15,7 +15,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Estagiario estagiario;
-    PlanoEstagio planoEstagio;
     Representante representante;
     SobreEstagio sobreEstagio;
     Supervisor supervisor;
@@ -23,7 +22,6 @@
     
     HttpSession sessao = request.getSession();
     estagiario = (Estagiario) sessao.getAttribute("ESTAGIARIO");
-    planoEstagio = (PlanoEstagio) sessao.getAttribute("PLANOESTAGIO");
     representante = (Representante) sessao.getAttribute("REPRESENTANTE");
     sobreEstagio = (SobreEstagio) sessao.getAttribute("SOBREESTAGIO");
     supervisor = (Supervisor) sessao.getAttribute("SUPERVISOR");
@@ -37,37 +35,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achei Estágio</title>
-
+    <link rel= "shortcut icon" href= "Imagens/imgLogo.ico " type= "image/x-icon">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/rel.css">
+    <link rel="stylesheet" href="css/fonte.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+    @media print {
+        header, footer, nav, aside, .button {
+           display: none;
+        }
+     }
+    </style>
+    
 
 </head>
 
 <body>
+    <!--navbar--->
     <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">one</a></li>
-        <li><a href="#!">two</a></li>
-        <li class="divider"></li>
-        <li><a href="#!">three</a></li>
+    <ul id= "dropdown1" class="dropdown-content">
+        <li><a href="dadosPessoais.jsp">Estágio Obrigatório</a></li>
+        <li><a href="dadosPessoaisNaoObr.jsp">Estágio Não-Obrigatório</a></li>
     </ul>
-    <nav>
-        <div class="nav-wrapper orange accent-3">
-            <a href="#!" class="brand-logo">Achei Estágio</a>
+    <nav class="nav-wrapper orange accent-3" >
+        <div class="nav-wrapper ">
+            <img src="Imagens/imgLogo.png " style="height: 60px; " alt=" ">
+            <a href="index.html" class="brand-logo ">Achei Estágio</a>
+
             <ul class="right hide-on-med-and-down">
-                <li><a href="index.html ">Home</a></li>
-                <li><a href="badges.html">Documentação Final</a></li>
+                <li><a href="#">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right"></i></a></li>
-            </ul>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
+              </ul>
         </div>
     </nav>
+    <!--navbar--->
 
     <main>
-        <h1 class="titulo">Requerimento Estágio Obrigatório</h1>
         <div class="container">
+            <div class="row center">
+                <div class="col s4">
+                 <h1 class="tipo">Requerimento Estágio Obrigatório</h1>
+                </div>
+                <div class="col s6">
+                    <img src="Imagens/unisagrado.png" style="max-width: 50%; height: auto;">
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <label class="titulo" for="NOME">NOME:</label>
@@ -88,8 +104,13 @@
                     <label class="info" for=""><%=estagiario.getEndereco().getBairro()%></label>
                 </div>
                 <div class="col m4">
-                    <label class="titulo" for="NOME">CIDADE:</label>
+                    <%  String x ="";
+                        if(estagiario.getDisciplina()!= null){x = "CIDADE";}
+                        else{x= "CIDADE/ESTADO";}
+                    %>
+                    <label class="titulo" for="NOME"><%=x%></label>
                     <label class="info" for=""><%=estagiario.getEndereco().getCidade()%></label>
+                    
                 </div>
                 <div class="col m4">
                     <label class="titulo" for="NOME">CEP:</label>
@@ -142,11 +163,13 @@
 
             <div class="row">
                 <div class="col">
+                    <%if(estagiario.getDisciplina()!= null){%>
                     <label class="titulo" for="NOME">NOME DA DISCIPLINA:</label>
                     <label class="info" for=""><%=estagiario.getDisciplina()%></label>
+                    <%}%>
                 </div>
             </div>
-            <br>
+           
             <div class="row">
                 <div class="col">
                     <label class="titulo" for="NOME">RAZÃO SOCIAL DA UNIDADE CONCEDENTE:</label>
@@ -238,23 +261,42 @@
             <div class="row">
                 <div class="col">
                     <label class="titulo" for="NOME">PERÍODO DO ESTÁGIO: de </label>
-                    <label class="info" for=""><%=sobreEstagio.getInicioEstagio()%> até </label>
-                    <label class="info" for=""> <%=sobreEstagio.getFimEstagio()%></label>
+                    <label class="info"><%out.print("De " + sobreEstagio.getInicioEstagio() + " até " + sobreEstagio.getFimEstagio());%> </label>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label class="titulo" for="NOME">DIAS DA SEMANA:</label>
-                    <label class="info" for="">Label</label>
+                    <label class="info" for="">
+                    <%
+                        String [] diasSemana = {"Sábado","Domingo","Segunda-Feira","Terca-Feira","Quarta-Feira", "Quinta-Feira","Sexta-Feira"};
+                        
+                        if (sobreEstagio.isDiasVariados())
+                            out.print("Dias Variados");
+                        else{
+                            for (int i = 0; i < sobreEstagio.getDiasSemana().length; i++) {
+                                    if(sobreEstagio.getDiasSemana()[i]){
+                                        out.print(diasSemana[i] + " | ");
+                                    }
+                                }
+                        }
+                    %>
+                    </label>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label class="titulo" for="NOME">HORÁRIO: </label>
-                    <label class="info" for=""> <%=sobreEstagio.getHoraEntrada()%></label>
-                    <label class="info" for="">até <%=sobreEstagio.getHoraSaida()%></label>
+                    <label class="info">
+                        <%
+                            if(sobreEstagio.isHorasVariadas())
+                                out.print("Horários Variados");
+                            else
+                                out.print("De "+ sobreEstagio.getHoraEntrada() + " até " + sobreEstagio.getHoraSaida());
+                        %>
+                    </label>
                 </div>
             </div>
 
@@ -264,18 +306,34 @@
                     <label class="info" for=""><%=sobreEstagio.getHorasSemanais()%> H </label>
                 </div>
             </div>
+                <%
+                    if(sobreEstagio.getApolice()!= null){
+                %>
+                <div class="row">
+                    <div class="col s4">
+                        <label class="titulo" for="NOME">BOLSA</label>
+                        <label class="info" for=""><%=sobreEstagio.getBolsa()%></label>
+                    </div>
+                    <div class="col s4">
+                        <label class="titulo" for="NOME">APÓLICE DE SEGURO</label>
+                        <label class="info" for=""><%=sobreEstagio.getApolice()%></label>
+                    </div>
+                    <div class="col s4">
+                        <label class="titulo" for="NOME">SEGURADORA/CORRETORA</label>
+                        <label class="info" for=""><%=sobreEstagio.getSeguradora()%></label>
+                    </div>
+                </div>
+                <%}%>
         </div>
+                <div class="container button ">
+                    <button onclick="window.print()" class="waves-effect waves-light btn orange accent-3" >Imprimir</button><br><br>
+                </div>
+                
     </main>
 
 
-    <footer class="page-footer orange accent-3 ">
-
-        <div class="footer-copyright ">
-            <div class="container ">
-                � 2014 Copyright Text
-                <a class="grey-text text-lighten-4 right " href="#! ">More Links</a>
-            </div>
-        </div>
+        <footer class="page-footer orange accent-3 center notprint" style="padding-top: 0px;">
+            © 2021 Copyright Text
     </footer>
     <script>
         M.AutoInit();
@@ -294,6 +352,7 @@
             $('select').formSelect();
         });
     </script>
+   
 </body>
 
 </html>

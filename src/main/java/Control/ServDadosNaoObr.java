@@ -5,7 +5,8 @@
  */
 package Control;
 
-import Model.PlanoEstagio;
+import Model.Endereco;
+import Model.Estagiario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,14 +15,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author carla
  */
-@WebServlet(name = "testeSE", urlPatterns = {"/testeSE"})
-public class testeSE extends HttpServlet {
-    PlanoEstagio planoEstagio;
+@WebServlet(name = "ServDadosNaoObr", urlPatterns = {"/ServDadosNaoObr"})
+public class ServDadosNaoObr extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,42 +33,81 @@ public class testeSE extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private void recebe(HttpServletRequest request){
-        //int semestre = Integer.parseInt(request.getParameter("optSemestre"));
-        int semestre = Integer.parseInt(request.getParameter("optSemestre"));
-        String atv = request.getParameter("txtAtvDesenvolvida");
-        preenche(semestre, atv);
-    }
+    Estagiario estagiario;
+    Endereco endereco;
     
-    private void preenche(int semestre, String atvDesenvolvida){
-        planoEstagio = new PlanoEstagio();
-        planoEstagio.setSemestre(semestre);
-        planoEstagio.setAtvDesenvolvida(atvDesenvolvida);
+        private void recebeDadosPessoais(HttpServletRequest request,HttpServletResponse response){
+        
+        String id = request.getParameter("txtId");
+        String nome = request.getParameter("txtNome");
+        String curso = request.getParameter("comboCurso");
+        String cpf = request.getParameter("txtCpf");
+        String nascimento = request.getParameter("dtNascimento");
+        String telefone1 = request.getParameter("txtTelefone1");
+        String telefone2 = request.getParameter("txtTelefone2");
+        String professor = request.getParameter("txtProfessor");
+        
+        String rua = request.getParameter("txtRua");
+        String bairro = request.getParameter("txtBairro");
+        String cidade = request.getParameter("txtCidade");
+        String cep = request.getParameter("txtCep");
+        
+        
+        preencherDadosPessoais(id, nome, curso, cpf, nascimento, telefone1, telefone2, professor, rua ,bairro, cidade, cep);
+    }
+        
+    private void preencherDadosPessoais(String id, String nome, String curso, String cpf, String nascimento,
+                                        String telefone1, String telefone2, String professor,
+                                        String rua, String bairro, String cidade, String cep){
+        estagiario = new Estagiario();
+        
+        estagiario.setId(id);
+        estagiario.setNome(nome);
+        estagiario.setCurso(curso);
+        estagiario.setCpf(cpf);
+        estagiario.setNascimento(nascimento);
+        estagiario.setTelefone1(telefone1);
+        estagiario.setTelefone2(telefone2);
+        estagiario.setProfessor(professor);
+        
+        this.endereco = new Endereco();
+        this.endereco.setRua(rua);
+        this.endereco.setBairro(bairro);
+        this.endereco.setCidade(cidade);
+        this.endereco.setCep(cep);
+        
+        estagiario.setEndereco(this.endereco);
+        
     }
     
     private void redirecionar(HttpServletRequest request, HttpServletResponse response){
-        RequestDispatcher rd = request.getRequestDispatcher("impressaoDocEstagio.html");
-        try {
-            rd.forward(request, response);
-        } catch(Exception e ){
+        HttpSession session = request.getSession();
+        session.setAttribute("ESTAGIARIO", estagiario);
+        
+       RequestDispatcher rd = request.getRequestDispatcher("unidadeConcedenteNaoObr.jsp");
+       try{
+            rd.forward(request,response);
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    
+
+    protected void processRequest( HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        recebe(request);
+        recebeDadosPessoais(request,response);
         redirecionar(request, response);
-        
+        //redirecionar(request, response);
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet testeSE</title>");            
+            out.println("<title>Servlet ServDadosNaoObr</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet testeSE at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServDadosNaoObr at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
