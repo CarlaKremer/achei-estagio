@@ -2,12 +2,15 @@ Control\dadosPessoais.class
 Control\ServPlanoEstagio.class
 Model\Endereco.class
 Utilitario\Semestres.class
+Control\ServEmail.class
 Utilitario\validate.class
 Control\ServSobreEstagioNaoObr.class
+Model\Email$1.class
 Control\ServUnidadeConcedente.class
 com\mycompany\achei_estagio_materialize\JAXRSConfiguration.class
 Control\ServSobreEstagio.class
 Utilitario\ValidarCpf.class
+Model\Email.class
 Model\Estagiario.class
 Utilitario\Cursos.class
 Control\ServDadosNaoObr.class

@@ -44,18 +44,24 @@ public class Endereco {
         return cep;
     }
 
-    public void setCep(String cep) {
+    public boolean setCep(String cep) {
+        boolean erro;
         try{
-            if((cep).matches("(^[0-9]{5})-?([0-9]{3}$)")){
+            if((cep).matches("(^[0-9]{5})-?([0-9]{3}$)") && cep != null){
                 this.cep = cep;
+                erro = false;
             }
             else{
-                this.cep = null;
+                erro=true;
+                System.out.println("erro else");
             }
         }
         catch(Exception e){
             e.printStackTrace();
+            System.out.println("erro catch");
+            erro=true;
         }
+        return erro;
     }
     
 }

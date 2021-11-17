@@ -35,79 +35,118 @@
     </nav>
     <!--navbar--->
     <div class="container">
-
+        
+        <h2 style="font-size: 40px;"><b>Unidade Concedente</b> </h2>
+        <%
+                String erro ="";
+                erro = (String) request.getAttribute("ERRO");
+                String razaoSocial = "" , cnpj= "", telefone1= "", telefone2= "", endereco = "",bairro= "", cidade = "", cep = "",
+                        pessoaAutorizada= "", cargoRepresentante="", rg="", cpf="",
+                        nomeSupervisor="", cargoSupervisor="", email="";
+                if (erro != null){
+                razaoSocial = (String) request.getAttribute("RAZAOSOCIAL");
+                cnpj = (String) request.getAttribute("CNPJ");
+                telefone1 = (String) request.getAttribute("TELEFONE1");
+                telefone2 = (String) request.getAttribute("TELEFONE2");
+                endereco = (String) request.getAttribute("ENDERECO");
+                bairro = (String) request.getAttribute("BAIRRO");
+                cidade = (String) request.getAttribute("CIDADE");
+                cep = (String) request.getAttribute("CEP");
+                pessoaAutorizada = (String) request.getAttribute("PESSOAAUTORIZADA");
+                cargoRepresentante = (String) request.getAttribute("CARGOREPRESENTANTE");
+                rg = (String) request.getAttribute("RG");
+                cpf = (String) request.getAttribute("CPF");
+                nomeSupervisor = (String) request.getAttribute("NOMESUPERVISOR");
+                cargoSupervisor = (String) request.getAttribute("CARGOSUPERVISOR");
+                email = (String) request.getAttribute("EMAIL");
+            %>
+            <div>
+                <div class="row" id="alert_box">
+                    <div class="col s12 m12">
+                      <div class="card red lighten-1 ">
+                        <div class="row">
+                          <div class="col s12 m10">
+                            <div class="card-content white-text ">
+                                <p class><%=erro%></p>
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
         <form action="ServUnidadeConcedente" method="POST">
         <div class="row col s12">
-            <h2 style="font-size: 40px;"><b>Unidade Concedente</b> </h2>
             <div class="row">
                 <div class="row col s6">
-                    <input id="nomeEmpresa" type="text" class="validate" name="txtRazaoSocial" required>
+                    <input value="<%if(razaoSocial != ""){%><%=razaoSocial%><%}%>" id="nomeEmpresa" type="text" class="validate" name="txtRazaoSocial" required>
                     <label class="black-text" for="nomeEmpresa">Razão Social</label>
                 </div>
                 <div class="row col s6">
-                    <input id="cnpjEmpresa" type="text" class="validate" name="txtCnpj" required>
+                    <input value="<%if(cnpj != ""){%><%=cnpj%><%}%>" id="cnpjEmpresa" type="text" class="validate" name="txtCnpj" required>
                     <label class="black-text" for="cnpj">CNPJ</label>
                 </div>
             </div>
             <div class="row">
                 <div class="row col s5">
-                    <input id="ederecoEmpresa" type="text" class="validate" name="txtRua" required>
+                    <input value="<%if(endereco != ""){%><%=endereco%><%}%>" id="ederecoEmpresa" type="text" class="validate" name="txtRua" required>
                     <label class="black-text" for="enderecoAluno">Endereço</label>
                 </div>
                 <div class="row col s3">
-                    <input id="bairrroEmpresa" type="text" class="validate" name="txtBairro" required>
+                    <input value="<%if(bairro != ""){%><%=bairro%><%}%>" id="bairrroEmpresa" type="text" class="validate" name="txtBairro" required>
                     <label class="black-text" for="bairroAluno">Bairro</label>
                 </div>
                 <div class="row col s4">
-                    <input id="cidadeEmpresa" type="text" class="validate" name="txtCidade" required>
+                    <input value="<%if(cidade != ""){%><%=cidade%><%}%>" id="cidadeEmpresa" type="text" class="validate" name="txtCidade" required>
                     <label class="black-text" for="cidadeAluno">Cidade</label>
                 </div>
             </div>
             <div class="row">
                 <div class="row col s3">
-                    <input id="cepEmpresa" maxlength="8" type="text" class="validate" name="txtCep" required>
+                    <input value="<%if(cep != "" && cep !=  "null"){%><%=cep%><%}%>" id="cepEmpresa" maxlength="8" type="text" class="validate" name="txtCep" required>
                     <label class="black-text" for="enderecoAluno">CEP</label>
                 </div>
                 <div class="row col s4">
-                    <input id="telefone1Empresa" maxlength="15" type="text" class="validate" name="txtTelefoneUnidade1" required>
+                    <input value="<%if(telefone1 != ""){%><%=telefone1%><%}%>" id="telefone1Empresa" maxlength="15" type="text" class="validate" name="txtTelefoneUnidade1" required>
                     <label class="black-text" for="bairroAluno">Telefone 1</label>
                 </div>
                 <div class="row  col s4">
-                    <input id="telefone2Empresa" maxlength="15" type="text" class="validate" name="txtTelefoneUnidade2" required>
+                    <input value="<%if(telefone2 != ""){%><%=telefone2%><%}%>" id="telefone2Empresa" maxlength="15" type="text" class="validate" name="txtTelefoneUnidade2" required>
                     <label class="black-text" for="cidadeAluno">Telefone 2</label>
                 </div>
             </div>
             <div class="row">
                 <h3 style="font-size: 30px;"><b>Representante Legal</b></h3>
-                <input id="nomeRepresentante" type="text" class="validate" name="txtPessoaAutorizada" required>
+                <input value="<%if(pessoaAutorizada != ""){%><%=pessoaAutorizada%><%}%>" id="nomeRepresentante" type="text" class="validate" name="txtPessoaAutorizada" required>
                 <label class="black-text" for="nomeRepresentante">Pessoa autorizada para assinatura do TCE</label>
             </div>
             <div class="row">
                 <div class="row col s4">
-                    <input id="cargoRepresentante" type="text" class="validate" name="txtCargoRepresentante" required>
+                    <input value="<%if(cargoRepresentante != ""){%><%=cargoRepresentante%><%}%>" id="cargoRepresentante" type="text" class="validate" name="txtCargoRepresentante" required>
                     <label class="black-text" for="cargoRepresentante">Cargo</label>
                 </div>
                 <div class="row col s4">
-                    <input id="rgRepresentante" maxlength="9" type="text" class="validate" name="txtRgRepresentante" required>
+                    <input value="<%if(rg != "" && rg !=  "null"){%><%=rg%><%}%>" id="rgRepresentante" maxlength="9" type="text" class="validate" name="txtRgRepresentante" required>
                     <label class="black-text" for="rgRepresentante">RG (sem pontuação) </label>
                 </div>
                 <div class="row  col s4">
-                    <input id="cpfRepresentante" maxlength="11" type="text" class="validate" name="txtCpfRepresentante" required>
+                    <input value="<%if(cpf != "" &&  cpf != "null"){%><%=cpf%><%}%>" id="cpfRepresentante" maxlength="11" type="text" class="validate" name="txtCpfRepresentante" required>
                     <label class="black-text" for="cpfRepresentante">CPF</label>
                 </div>
             </div>
             <div class="row">
                 <h3 style="font-size: 30px;"><b>Supervisor</b></h3>
-                <input id="nomeSupervisor" type="text" class="validate" name="txtNomeSupervisor" required>
+                <input value="<%if(nomeSupervisor != ""){%><%=nomeSupervisor%><%}%>" id="nomeSupervisor" type="text" class="validate" name="txtNomeSupervisor" required>
                 <label class="black-text" for="nomeSupervisor">Nome</label>
             </div>
             <div class="row">
                 <div class="row col s4">
-                    <input id="cargoSupervisor" type="text" class="validate" name="txtCargoSupervisor" required>
+                    <input value="<%if(cargoSupervisor != ""){%><%=cargoSupervisor%><%}%>" id="cargoSupervisor" type="text" class="validate" name="txtCargoSupervisor" required>
                     <label class="black-text" for="cargoSupervisor">Cargo</label>
                 </div>
                 <div class="row col s4">
-                    <input id="emailSupervisor" type="email" class="validate" name="txtEmailSupervisor" required>
+                    <input value="<%if(email != ""){%><%=email%><%}%>" id="emailSupervisor" id="emailSupervisor" type="email" class="validate" name="txtEmailSupervisor" required>
                     <label class="black-text" for="emailSupervisor]">E-mail</label>
                 </div>
             </form>

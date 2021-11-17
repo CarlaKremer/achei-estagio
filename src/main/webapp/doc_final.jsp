@@ -5,9 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Model.Email"%>
+<%
 
+%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -46,28 +49,40 @@
         <div class="container">
             <h2 style="font-size: 40px;"><b>Documentação Final Estágio</b> </h2>
  
-            <form action="">
+            <form action="ServEmail" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="id" type="text" class="validate" name="txtId">
+                        <label class="black-text" for="txtId" >ID</label>
+                    </div>
+                    <div class="input-field col s9">
+                        <input id="nome" type="text" class="validate" name="txtNome">
+                        <label class="black-text" for="txtNome" >Nome</label>
+                    </div>
+                </div>
                 <div class="file-field input-field" >
                     <p style="font-size: 20px;">Ficha de frequência</p>
+                    <p style="font-size: 12px;">Anexe um arquivo em pdf</p>
                     <div class="btn orange accent-3">
                         <span>File</span>
-                        <input type="file">
+                        <input  name="file" type="file">
                     </div>
                     <div class="file-path-wrapper ">
-                        <input class="file-path validate" type="text">
+                        <input class="file-path validate"  type="text">
                     </div>
                 </div>
-                <div class="file-field input-field">
+                <div class="file-field input-field" >
                     <p style="font-size: 20px;">Declaração</p>
+                    <p style="font-size: 12px;">Anexe um arquivo em pdf</p>
                     <div class="btn orange accent-3">
                         <span>File</span>
-                        <input type="file">
+                        <input  name="file2" type="file">
                     </div>
                     <div class="file-path-wrapper ">
-                        <input class="file-path validate" type="text">
+                        <input class="file-path validate"  type="text">
                     </div>
                 </div>
-                <br><button class="waves-effect waves-light btn orange accent-3 right" type="submit" >Enviar</button>
+                <br><button class="waves-effect waves-light btn orange accent-3 right" >Enviar</button>
             </form>
         </div>
     </main>

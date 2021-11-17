@@ -64,21 +64,24 @@ public class Estagiario {
     }
     
 
-    public void setCpf(String cpf) {
+    public boolean setCpf(String cpf) {
+        boolean erro = false;
         ValidarCpf vc = new ValidarCpf();
         try {
-            if(vc.isCPF(cpf) == true){
-                //this.cpf = vc.imprimeCPF(cpf);
+            if(vc.isCPF(cpf) == true && cpf != null){
+                this.cpf = vc.imprimeCPF(cpf);
                 this.cpf = cpf;
+                erro = false;
             }
             else{
                 System.out.println();
+                erro = true;
             }
         }
         catch(Exception e){
             e.printStackTrace();
         }
-        
+         return erro;
     }
 
     public String getNascimento() {

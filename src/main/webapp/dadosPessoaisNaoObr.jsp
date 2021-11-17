@@ -39,23 +39,55 @@
     <div class="container">
         <h2 style="font-size: 40px;"> <b>Requerimento de estágio Não-Obrigatório</b></h2>
         <div class="row col s12">
-            
+            <%
+                String erro ="";
+                erro = (String) request.getAttribute("ERRO");
+                String id = "" , nome= "", cpf= "", nascimento= "", telefone1= "", telefone2= "", professor= "", endereco = "",bairro= "", cidade = "", cep = "";
+                if (erro != null){
+                id = (String) request.getAttribute("ID");
+                nome = (String) request.getAttribute("NOME");
+                cpf = (String) request.getAttribute("CPF");
+                nascimento = (String) request.getAttribute("NASCIMENTO");
+                telefone1 = (String) request.getAttribute("TELEFONE1");
+                telefone2 = (String) request.getAttribute("TELEFONE2");
+                professor = (String) request.getAttribute("PROFESSOR");
+                endereco = (String) request.getAttribute("ENDERECO");
+                bairro = (String) request.getAttribute("BAIRRO");
+                cidade = (String) request.getAttribute("CIDADE");
+                cep = (String) request.getAttribute("CEP");
+            %>
+            <div>
+                <div class="row" id="alert_box">
+                    <div class="col s12 m12">
+                      <div class="card red lighten-1 ">
+                        <div class="row">
+                          <div class="col s12 m10">
+                            <div class="card-content white-text ">
+                                <p class><%=erro%></p>
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
             <form class="col s12" action="ServDadosNaoObr" method="POST">
                 <input id="parametro" type="hidden" class="validate" name="parametro" value="">
                 <div class="row">
                     <h1 style="font-size: 35px;"> <b>Dados Pessoais</b></h1>
                     <div class="input-field col s3">
-                        <input id="idAluno" type="text" class="validate" name="txtId" required>
+                        <input value="<%if(id != ""){%><%=id%><%}%>" id="idAluno" type="text" class="validate" name="txtId" required>
                         <label class="black-text" for="idAluno">ID</label>
                     </div>
                     <div class="input-field col s3">
-                        <input id="txtCpf" maxlength="11" type="text" class="validate" name="txtCpf" required>
+                        <input value="<%if(cpf != "" && cpf !=  "null"){%><%=cpf%><%}%>" id="txtCpf" maxlength="11" type="text" class="validate" name="txtCpf" required>
                         <label class="black-text" for="cpfAluno">CPF (sem pontuação)</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="nomeAluno" type="text" name="txtNome" class="validate" required>
+                        <input value="<%if(nome != ""){%><%=nome%><%}%>" id="nomeAluno" type="text" name="txtNome" class="validate" required>
                         <label class="black-text" for="nomeAluno">Nome</label>
                     </div>
                 </div>
@@ -78,39 +110,39 @@
                 </div>
                 <div class="row">
                     <div class="row  col s2">
-                        <input id="dataNascimentoAluno" type="text" class="datepicker" name ="dtNascimento" required>
+                        <input value="<%if(nascimento != "" && nascimento != null){%><%=nascimento%><%}%>" id="dataNascimentoAluno" type="text" class="datepicker" name ="dtNascimento" required>
                         <label class="black-text " for="enderecoAluno">Data de Nascimento</label>
                     </div>
                     <div class="row  col s4">
-                        <input id="enderecoAluno" type="text" class="validate" name="txtRua" required>
+                        <input value="<%if(endereco != ""){%><%=endereco%><%}%>" id="enderecoAluno" type="text" class="validate" name="txtRua" required>
                         <label class="black-text" for="enderecoAluno">Endereço</label>
                     </div>
                     <div class="row col s2">
-                        <input id="bairrroAluno" type="text" class="validate" name="txtBairro" required>
+                        <input value="<%if(bairro != ""){%><%=bairro%><%}%>" id="bairrroAluno" type="text" class="validate" name="txtBairro" required>
                         <label class="black-text" for="bairroAluno">Bairro</label>
                     </div>
                     <div class="row  col s4">
-                        <input id="cidadeAluno" type="text" class="validate" name="txtCidade" required>
+                        <input value="<%if(cidade != ""){%><%=cidade%><%}%>" id="cidadeAluno" type="text" class="validate" name="txtCidade" required>
                         <label class="black-text" for="cidadeAluno">Cidade</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="row  col s3">
-                        <input id="cepAluno" maxlength="8" type="text" class="validate" name="txtCep" required>
+                        <input value="<%if(cep != "" && cep != "null"){%><%=cep%><%}%>" id="cepAluno" maxlength="8" type="text" class="validate" name="txtCep" required>
                         <label class = "black-text" for="cepAluno">CEP (sem pontuação)</label>
                     </div>
                     <div class="row  col s4">
-                        <input id="telefone1Aluno" maxlength="15" type="text" name="txtTelefone1" class="validate"   required>
+                        <input value="<%if(telefone1 != ""){%><%=telefone1%><%}%>" value="<%if(telefone1 != ""){%><%=telefone1%><%}%>" id="telefone1Aluno" maxlength="15" type="text" name="txtTelefone1" class="validate"   required>
                         <label class="black-text" for="telefone1Aluno">Telefone 1</label>
                     </div>
                     <div class="row  col s4">
-                        <input id="telefone2Aluno" maxlength="15" type="text" name="txtTelefone2" class="validate" required>
+                        <input value="<%if(telefone2 != ""){%><%=telefone2%><%}%>" id="telefone2Aluno" maxlength="15" type="text" name="txtTelefone2" class="validate" required>
                         <label class="black-text" for="telefoneAluno">Telefone 2</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="row input-field col s4">
-                        <input id="professorOrientador" type="text" class="validate" name="txtProfessor" required>
+                        <input value="<%if(professor != ""){%><%=professor%><%}%>" id="professorOrientador" type="text" class="validate" name="txtProfessor" required>
                         <label class="black-text" for="professorOrientador">Professor Orientador</label>
                     </div>
                 </div>

@@ -33,37 +33,44 @@ public class Representante {
         return rg;
     }
 
-    public void setRg(String rg) {
+    public boolean setRg(String rg) {
+        boolean erro = false;
         try{
-            if((rg).matches("(^\\d{1,2}).?(\\d{3}).?(\\d{3})-?(\\d{1}|X|x$)")){
+            if((rg).matches("(^\\d{1,2}).?(\\d{3}).?(\\d{3})-?(\\d{1}|X|x$)") && rg!=null){
                 this.rg = rg.substring(0,2)+"."+rg.substring(2,5)+"."+rg.substring(5,8)+"-"+rg.subSequence(8, 9);
+                erro = false;
             }
             else{
-                this.rg = ("erro");
+                erro = true;
             }
         }
         catch(Exception e){
             e.printStackTrace();
         }
+        return erro;
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public boolean setCpf(String cpf) {
+        boolean erro = false;
         ValidarCpf vc = new ValidarCpf();
         try {
-            if(vc.isCPF(cpf) == true){
+            if(vc.isCPF(cpf) == true && cpf != null){
                 this.cpf = vc.imprimeCPF(cpf);
+                erro = false;
             }
             else{
                 System.out.println("");
+                erro = true;
             }
         }
         catch(Exception e){
             e.printStackTrace();
         }
+        return erro;
     }
    private String pessoaAutorizada;
    private String cargo; 

@@ -78,7 +78,7 @@
         <div class="container">
             <div class="row center">
                 <div class="col s4">
-                 <h1 class="tipo">Requerimento Estágio Obrigatório</h1>
+                 <h1 class="tipo">Requerimento Estágio</h1>
                 </div>
                 <div class="col s6">
                     <img src="Imagens/unisagrado.png" style="max-width: 50%; height: auto;">

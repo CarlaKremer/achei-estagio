@@ -35,6 +35,9 @@ public class ServDadosNaoObr extends HttpServlet {
      */
     Estagiario estagiario;
     Endereco endereco;
+    boolean erroCep=false;
+    boolean erroCpf= false;
+    String pagina;
     
         private void recebeDadosPessoais(HttpServletRequest request,HttpServletResponse response){
         
@@ -64,7 +67,7 @@ public class ServDadosNaoObr extends HttpServlet {
         estagiario.setId(id);
         estagiario.setNome(nome);
         estagiario.setCurso(curso);
-        estagiario.setCpf(cpf);
+        erroCpf = estagiario.setCpf(cpf);
         estagiario.setNascimento(nascimento);
         estagiario.setTelefone1(telefone1);
         estagiario.setTelefone2(telefone2);
@@ -74,17 +77,17 @@ public class ServDadosNaoObr extends HttpServlet {
         this.endereco.setRua(rua);
         this.endereco.setBairro(bairro);
         this.endereco.setCidade(cidade);
-        this.endereco.setCep(cep);
+        erroCep = this.endereco.setCep(cep);
         
         estagiario.setEndereco(this.endereco);
         
     }
     
-    private void redirecionar(HttpServletRequest request, HttpServletResponse response){
+    private void redirecionar(String pagina, HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         session.setAttribute("ESTAGIARIO", estagiario);
         
-       RequestDispatcher rd = request.getRequestDispatcher("unidadeConcedenteNaoObr.jsp");
+       RequestDispatcher rd = request.getRequestDispatcher(pagina);
        try{
             rd.forward(request,response);
         }catch(Exception e){
@@ -97,7 +100,25 @@ public class ServDadosNaoObr extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         recebeDadosPessoais(request,response);
-        redirecionar(request, response);
+        if (erroCep == false && erroCpf == false){
+             redirecionar("unidadeConcedenteNaoObr.jsp",request, response);
+        }else if (erroCep == true || erroCpf == true){
+            String erro = "Há dados inválidos";
+            request.setAttribute("ERRO", erro);
+            request.setAttribute("ID", String.valueOf(estagiario.getId()));
+            request.setAttribute("CPF", String.valueOf(estagiario.getCpf()));
+            request.setAttribute("NOME", String.valueOf(estagiario.getNome()));
+            request.setAttribute("DATA", String.valueOf(estagiario.getNascimento()));
+            request.setAttribute("ENDERECO", String.valueOf(estagiario.getEndereco().getRua()));
+            request.setAttribute("BAIRRO", String.valueOf(estagiario.getEndereco().getBairro()));
+            request.setAttribute("CIDADE", String.valueOf(estagiario.getEndereco().getCidade()));
+            request.setAttribute("CEP", String.valueOf(estagiario.getEndereco().getCep()));
+            request.setAttribute("TELEFONE1", String.valueOf(estagiario.getTelefone1()));
+            request.setAttribute("TELEFONE2", String.valueOf(estagiario.getTelefone2()));
+            request.setAttribute("PROFESSOR", String.valueOf(estagiario.getProfessor()));
+            request.setAttribute("DISCIPLINA", String.valueOf(estagiario.getDisciplina()));
+            redirecionar("/dadosPessoaisNaoObr.jsp", request, response); 
+        }
         //redirecionar(request, response);
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

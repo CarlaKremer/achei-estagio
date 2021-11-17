@@ -39,6 +39,10 @@ public class ServUnidadeConcedenteNaoObr extends HttpServlet {
     Endereco endereco;
     Representante representante;
     Supervisor supervisor;
+    boolean erroCep=false;
+    boolean erroCpf= false;
+    boolean erroRg = false;
+    String pagina;
     
     private void recebeDados(HttpServletRequest request){
         String razaoSocial= request.getParameter("txtRazaoSocial");
@@ -79,7 +83,7 @@ public class ServUnidadeConcedenteNaoObr extends HttpServlet {
         this.endereco.setCidade(cidade);
         this.endereco.setBairro(bairro);
         this.endereco.setRua(rua);
-        this.endereco.setCep(cep);
+        erroCep = this.endereco.setCep(cep);
         unidadeConcedente.setEndereco(this.endereco);
     }
     
@@ -87,8 +91,8 @@ public class ServUnidadeConcedenteNaoObr extends HttpServlet {
         representante = new Representante();
         representante.setPessoaAutorizada(pessoaAutorizada);
         representante.setCargo(cargo);
-        representante.setRg(rg);
-        representante.setCpf(cpf);
+        erroRg = representante.setRg(rg);
+        erroCpf = representante.setCpf(cpf);
         
     }
     
@@ -99,13 +103,13 @@ public class ServUnidadeConcedenteNaoObr extends HttpServlet {
         supervisor.setEmail(email);
     }
     
-    private void redirecionar(HttpServletRequest request, HttpServletResponse response){
+    private void redirecionar(String pagina, HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         session.setAttribute("UNIDADECONCEDENTE", unidadeConcedente);
         session.setAttribute("REPRESENTANTE", representante);
         session.setAttribute("SUPERVISOR",supervisor);
         
-        RequestDispatcher rd = request.getRequestDispatcher("sobreEstagioNaoObr.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher(pagina);
         try{
             rd.forward(request,response);
         }catch(Exception e){
@@ -116,7 +120,30 @@ public class ServUnidadeConcedenteNaoObr extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         recebeDados(request);
-        redirecionar(request, response);
+        if(erroCpf == false && erroCep == false && erroRg == false){
+            redirecionar("sobreEstagioNaoObr.jsp", request, response);
+        }
+        else{
+            String erro = "Há dados inválidos!";
+            request.setAttribute("ERRO", erro);
+            request.setAttribute("RAZAOSOCIAL", String.valueOf(unidadeConcedente.getRazaoSocial()));
+            request.setAttribute("CNPJ", String.valueOf(unidadeConcedente.getCnpj()));
+            request.setAttribute("TELEFONE1", String.valueOf(unidadeConcedente.getTelefone1()));
+            request.setAttribute("TELEFONE2", String.valueOf(unidadeConcedente.getTelefone2()));
+            request.setAttribute("ENDERECO", String.valueOf(unidadeConcedente.getEndereco().getRua()));
+            request.setAttribute("BAIRRO", String.valueOf(unidadeConcedente.getEndereco().getBairro()));
+            request.setAttribute("CIDADE", String.valueOf(unidadeConcedente.getEndereco().getCidade()));
+            request.setAttribute("CEP", String.valueOf(unidadeConcedente.getEndereco().getCep()));
+            request.setAttribute("PESSOAAUTORIZADA", String.valueOf(representante.getPessoaAutorizada()));
+            request.setAttribute("CARGOREPRESENTANTE", String.valueOf(representante.getCargo()));
+            request.setAttribute("RG", String.valueOf(representante.getRg()));
+            request.setAttribute("CPF", String.valueOf(representante.getCpf()));
+            request.setAttribute("NOMESUPERVISOR", String.valueOf(supervisor.getNome()));
+            request.setAttribute("CARGOSUPERVISOR", String.valueOf(supervisor.getCargo()));
+            request.setAttribute("EMAIL", String.valueOf(supervisor.getEmail()));
+            redirecionar("unidadeConcedenteNaoObr.jsp", request, response);
+        }
+        
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
