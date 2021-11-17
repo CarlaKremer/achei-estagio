@@ -6,12 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Model.Email"%>
-<%
-
-%>
 <!DOCTYPE html>
 <html lang="pt-br">
-
+<%
+   String enviou;
+   enviou = String.valueOf(request.getAttribute("ENVIO"));
+   String retornoUsuarioErro ="Não foi possível enviar os arquivos, tente novamente." ;
+   String retornoUsuarioSucesso = "Arquivos enviados com sucesso! Você já pode sair desta página.";
+%>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,7 +50,39 @@
     <main>
         <div class="container">
             <h2 style="font-size: 40px;"><b>Documentação Final Estágio</b> </h2>
- 
+            <%if (enviou == "true"){%>
+            <div>
+                <div class="row" id="alert_box">
+                    <div class="col s12 m12">
+                      <div class="card green lighten-1 ">
+                        <div class="row">
+                          <div class="col s12 m10">
+                            <div class="card-content white-text ">
+                                <p class><%=retornoUsuarioSucesso%></p>
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                    </div>
+                </div>
+            </div>
+            <%}else if(enviou == "false"){%>
+             <div>
+                <div class="row" id="alert_box">
+                    <div class="col s12 m12">
+                      <div class="card red lighten-1 ">
+                        <div class="row">
+                          <div class="col s12 m10">
+                            <div class="card-content white-text ">
+                                <p class><%=retornoUsuarioErro%></p>
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
             <form action="ServEmail" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s3">
@@ -82,7 +116,7 @@
                         <input class="file-path validate"  type="text">
                     </div>
                 </div>
-                <br><button class="waves-effect waves-light btn orange accent-3 right" >Enviar</button>
+                <br><button class="waves-effect waves-light btn orange accent-3 right" >Enviar</button><br><br>
             </form>
         </div>
     </main>

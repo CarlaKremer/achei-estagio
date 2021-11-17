@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import Model.Email;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -56,18 +58,29 @@ public class ServEmail extends HttpServlet {
             email.setEmailDestinatario("achei.estagi@gmail.com");
             email.setAssunto("Achei Estágio");
             enviou = email.enviarGmail();
+            request.setAttribute("ENVIO", enviou);
+            
             System.out.println("Se enviou:"+enviou);
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-    private void redirecionar(HttpServletRequest request, HttpServletResponse response){
-        
+    private void redirecionar (HttpServletRequest request, HttpServletResponse response){
+
+        RequestDispatcher rd = request.getRequestDispatcher("doc_final.jsp");
+        try{
+            rd.forward(request,response);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         config(request);
+        redirecionar(request, response);
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
