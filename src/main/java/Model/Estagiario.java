@@ -70,7 +70,6 @@ public class Estagiario {
         try {
             if(vc.isCPF(cpf) == true && cpf != null){
                 this.cpf = vc.imprimeCPF(cpf);
-                this.cpf = cpf;
                 erro = false;
             }
             else{

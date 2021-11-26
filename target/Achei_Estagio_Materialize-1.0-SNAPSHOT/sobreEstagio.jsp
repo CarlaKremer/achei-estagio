@@ -1,6 +1,6 @@
 <%@page import="Model.Estagiario"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -27,7 +27,7 @@
             <a href="index.html" class="brand-logo ">Achei Estágio</a>
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Documentação Final</a></li>
+                <li><a href="doc_final.jsp">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
               </ul>
@@ -43,7 +43,7 @@
             </div>
             <div class="row col s12">
                 <div class="row col s6">
-                    <input id="inicioEstagio" type="text" class="datepicker" name="dtInicioEstagio" required>
+                    <input id="inicioEstagio" type="text" class="datepicker"  name="dtInicioEstagio" required>
                     <label class="black-text " for="inicioEstagio">Início</label>
                 </div>
                 <div class="row col s6">
@@ -147,7 +147,19 @@
     </script>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    
+    <script><!--Máscara data-->
+        document.getElementById('inicioEstagio').addEventListener('input', function (e){
+         var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,2})(\d{0,4})/);
+         e.target.value = !x[2] ? x[1] : x[1] + '/' + x[2] +'/'+ x[3];
+        });
+    </script>
+    <script><!--Máscara data-->
+        document.getElementById('fimEstagio').addEventListener('input', function (e){
+         var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,2})(\d{0,4})/);
+         e.target.value = !x[2] ? x[1] : x[1] + '/' + x[2] +'/'+ x[3];
+        });
+    </script>
+     
     <script>
         $(document).ready(function(){
           $('.timepicker').timepicker();

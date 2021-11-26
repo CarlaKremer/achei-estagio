@@ -31,8 +31,23 @@ public class UnidadeConcedente {
         return cnpj;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public boolean setCnpj(String cnpj) {
+        boolean erro = false;
+        try{
+            if((cnpj).matches("(^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$)") && cnpj!=null){
+                //this.rg = rg.substring(0,2)+"."+rg.substring(2,5)+"."+rg.substring(5,8)+"-"+rg.subSequence(8, 9);
+                this.cnpj = cnpj;
+                erro = false;
+            }
+            else{
+                System.out.println("erro cnpj");
+                erro = true;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return erro;
     }
 
     public String getTelefone1() {

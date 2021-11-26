@@ -84,9 +84,9 @@ public class ServDadosNaoObr extends HttpServlet {
     }
     
     private void redirecionar(String pagina, HttpServletRequest request, HttpServletResponse response){
-        HttpSession session = request.getSession();
-        session.setAttribute("ESTAGIARIO", estagiario);
-        
+       HttpSession session = request.getSession();
+       session.setAttribute("ESTAGIARIO", estagiario);
+
        RequestDispatcher rd = request.getRequestDispatcher(pagina);
        try{
             rd.forward(request,response);

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import Model.Email;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpSession;
+
 
 /**
  *
@@ -45,12 +45,11 @@ public class ServEmail extends HttpServlet {
             System.out.println("tamanho: "+filePart2.getSize());
             System.out.println("conteudo: "+filePart2.getContentType());
              
-            // obtains input stream of the upload file
+            // obtem inputstream do arquivo
             inputStream = filePart.getInputStream();
             inputStream2 = filePart.getInputStream();
         }
         try{
-            //getServletContext().getRequestDispatcher("/Message.jsp").forward(request, response);
             email.setArquivo(inputStream);
             email.setArquivo2(inputStream2);
             email.setid(id);

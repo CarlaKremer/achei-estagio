@@ -66,7 +66,7 @@
             <a href="index.html" class="brand-logo ">Achei Estágio</a>
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Documentação Final</a></li>
+                <li><a href="doc_final.jsp">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
               </ul>
@@ -260,7 +260,7 @@
 
             <div class="row">
                 <div class="col">
-                    <label class="titulo" for="NOME">PERÍODO DO ESTÁGIO: de </label>
+                    <label class="titulo" for="NOME">PERÍODO DO ESTÁGIO: </label>
                     <label class="info"><%out.print("De " + sobreEstagio.getInicioEstagio() + " até " + sobreEstagio.getFimEstagio());%> </label>
                 </div>
             </div>

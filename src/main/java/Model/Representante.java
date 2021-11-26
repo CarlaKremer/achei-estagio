@@ -37,7 +37,7 @@ public class Representante {
         boolean erro = false;
         try{
             if((rg).matches("(^\\d{1,2}).?(\\d{3}).?(\\d{3})-?(\\d{1}|X|x$)") && rg!=null){
-                this.rg = rg.substring(0,2)+"."+rg.substring(2,5)+"."+rg.substring(5,8)+"-"+rg.subSequence(8, 9);
+                this.rg = rg; /*.substring(0,2)+"."+rg.substring(2,5)+"."+rg.substring(5,8)+"-"+rg.subSequence(8, 9);*/
                 erro = false;
             }
             else{

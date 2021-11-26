@@ -34,6 +34,7 @@ public class ServUnidadeConcedente extends HttpServlet {
     boolean erroCep=false;
     boolean erroCpf= false;
     boolean erroRg = false;
+    boolean erroCnpj = false;
     String pagina;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -76,7 +77,7 @@ public class ServUnidadeConcedente extends HttpServlet {
         unidadeConcedente  = new UnidadeConcedente ();
         
         unidadeConcedente.setRazaoSocial(razaoSocial);
-        unidadeConcedente.setCnpj(cnpj);
+        erroCnpj = unidadeConcedente.setCnpj(cnpj);
         unidadeConcedente.setTelefone1(telefone1);
         unidadeConcedente.setTelefone2(telefone2);
         
@@ -124,7 +125,7 @@ public class ServUnidadeConcedente extends HttpServlet {
         
         recebeDados(request);
         
-        if(erroCpf == false && erroCep == false && erroRg == false){
+        if(erroCpf == false && erroCep == false && erroRg == false && erroCnpj == false){
             redirecionar("sobreEstagio.jsp", request, response);
         }
         else{

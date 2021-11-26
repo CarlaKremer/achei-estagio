@@ -42,6 +42,7 @@ public class ServUnidadeConcedenteNaoObr extends HttpServlet {
     boolean erroCep=false;
     boolean erroCpf= false;
     boolean erroRg = false;
+    boolean erroCnpj = false;
     String pagina;
     
     private void recebeDados(HttpServletRequest request){
@@ -75,7 +76,7 @@ public class ServUnidadeConcedenteNaoObr extends HttpServlet {
         unidadeConcedente  = new UnidadeConcedente ();
         
         unidadeConcedente.setRazaoSocial(razaoSocial);
-        unidadeConcedente.setCnpj(cnpj);
+        erroCnpj = unidadeConcedente.setCnpj(cnpj);
         unidadeConcedente.setTelefone1(telefone1);
         unidadeConcedente.setTelefone2(telefone2);
         
@@ -120,7 +121,7 @@ public class ServUnidadeConcedenteNaoObr extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         recebeDados(request);
-        if(erroCpf == false && erroCep == false && erroRg == false){
+        if(erroCpf == false && erroCep == false && erroRg == false && erroCnpj == false){
             redirecionar("sobreEstagioNaoObr.jsp", request, response);
         }
         else{

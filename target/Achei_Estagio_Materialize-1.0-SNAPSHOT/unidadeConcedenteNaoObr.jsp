@@ -1,6 +1,6 @@
 <%@page import="Model.Estagiario"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -27,7 +27,7 @@
             <a href="index.html" class="brand-logo ">Achei Estágio</a>
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Documentação Final</a></li>
+                <li><a href="doc_final.jsp">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
               </ul>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="row  col s4">
                     <input value="<%if(cpf != "" &&  cpf != "null"){%><%=cpf%><%System.out.println(cpf);}%>" id="cpfRepresentante" type="text" class="validate" name="txtCpfRepresentante" required>
-                    <label class="black-text" for="cpfRepresentante">CPF</label>
+                    <label class="black-text" for="cpfRepresentante">CPF (Sem pontuação)</label>
                 </div>
             </div>
             <div class="row">
@@ -171,6 +171,24 @@
 
     <script>
         $(".dropdown-trigger").dropdown();
+    </script>
+    <script> <!--máscara cnpj--> 
+          document.getElementById('cnpjEmpresa').addEventListener('input', function (e) {
+          var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})/);
+          e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
+    });         
+    </script>
+    <script><!--Máscara rg-->
+        document.getElementById('rgRepresentante').addEventListener('input', function (e){
+         var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,1})/);
+         e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '-' + x[4] ;
+        });
+    </script>
+    <script><!--Máscara cep-->
+        document.getElementById('cepEmpresa').addEventListener('input', function (e){
+         var x = e.target.value.replace(/\D/g, '').match(/(\d{0,5})(\d{0,3})/);
+         e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] ;
+        });
     </script>
     <script>
         function mascaraTel(o,f){

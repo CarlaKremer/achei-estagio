@@ -40,7 +40,7 @@
             <a href="index.html" class="brand-logo ">Achei Estágio</a>
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Documentação Final</a></li>
+                <li><a href="doc_final.jsp">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
               </ul>
@@ -50,6 +50,7 @@
     <main>
         <div class="container">
             <h2 style="font-size: 40px;"><b>Documentação Final Estágio</b> </h2>
+            
             <%if (enviou == "true"){%>
             <div>
                 <div class="row" id="alert_box">
@@ -83,14 +84,15 @@
                 </div>
             </div>
             <%}%>
+            
             <form action="ServEmail" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s3">
-                        <input id="id" type="text" class="validate" name="txtId">
+                        <input id="id" type="text" class="validate" name="txtId" required
                         <label class="black-text" for="txtId" >ID</label>
                     </div>
                     <div class="input-field col s9">
-                        <input id="nome" type="text" class="validate" name="txtNome">
+                        <input id="nome" type="text" class="validate" name="txtNome" required>
                         <label class="black-text" for="txtNome" >Nome</label>
                     </div>
                 </div>
@@ -98,8 +100,8 @@
                     <p style="font-size: 20px;">Ficha de frequência</p>
                     <p style="font-size: 12px;">Anexe um arquivo em pdf</p>
                     <div class="btn orange accent-3">
-                        <span>File</span>
-                        <input  name="file" type="file">
+                        <span>Arquivo</span>
+                        <input  name="file" type="file" required>
                     </div>
                     <div class="file-path-wrapper ">
                         <input class="file-path validate"  type="text">
@@ -109,8 +111,8 @@
                     <p style="font-size: 20px;">Declaração</p>
                     <p style="font-size: 12px;">Anexe um arquivo em pdf</p>
                     <div class="btn orange accent-3">
-                        <span>File</span>
-                        <input  name="file2" type="file">
+                        <span>Arquivo</span>
+                        <input  name="file2" type="file" required>
                     </div>
                     <div class="file-path-wrapper ">
                         <input class="file-path validate"  type="text">

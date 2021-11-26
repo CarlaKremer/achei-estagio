@@ -14,7 +14,7 @@
 <%@page import="Model.Estagiario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <%
     Estagiario estagiario;
     Representante representante;
@@ -61,7 +61,7 @@
             <a href="index.html" class="brand-logo ">Achei Estágio</a>
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Documentação Final</a></li>
+                <li><a href="doc_final.jsp">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
               </ul>

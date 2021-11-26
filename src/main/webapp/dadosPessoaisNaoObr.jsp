@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="Utilitario.Cursos"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -28,7 +28,7 @@
             <a href="index.html " class="brand-logo ">Achei Estágio</a>
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Documentação Final</a></li>
+                <li><a href="doc_final.jsp">Documentação Final</a></li>
                 <!-- Dropdown Trigger -->
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Requerimentos<i class="material-icons right">arrow_drop_down</i></a></li>
               </ul>
@@ -111,7 +111,7 @@
                 <div class="row">
                     <div class="row  col s2">
                         <input value="<%if(nascimento != "" && nascimento != null){%><%=nascimento%><%}%>" id="dataNascimentoAluno" type="text" class="datepicker" name ="dtNascimento" required>
-                        <label class="black-text " for="enderecoAluno">Data de Nascimento</label>
+                        <label class="black-text " for="dataAluno">Data de Nascimento</label>
                     </div>
                     <div class="row  col s4">
                         <input value="<%if(endereco != ""){%><%=endereco%><%}%>" id="enderecoAluno" type="text" class="validate" name="txtRua" required>
@@ -128,7 +128,7 @@
                 </div>
                 <div class="row">
                     <div class="row  col s3">
-                        <input value="<%if(cep != "" && cep != "null"){%><%=cep%><%}%>" id="cepAluno" maxlength="8" type="text" class="validate" name="txtCep" required>
+                        <input value="<%if(cep != "" && cep != "null"){%><%=cep%><%}%>" id="cepAluno"  type="text" class="validate" name="txtCep" required>
                         <label class = "black-text" for="cepAluno">CEP (sem pontuação)</label>
                     </div>
                     <div class="row  col s4">
@@ -175,6 +175,18 @@
     <script>
         $(document).ready(function() {
             $('select').formSelect();
+        });
+    </script>
+    <script><!--Máscara cep-->
+        document.getElementById('cepAluno').addEventListener('input', function (e){
+         var x = e.target.value.replace(/\D/g, '').match(/(\d{0,5})(\d{0,3})/);
+         e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] ;
+        });
+    </script>
+    <script><!--Máscara data-->
+        document.getElementById('dataNascimentoAluno').addEventListener('input', function (e){
+         var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,2})(\d{0,4})/);
+         e.target.value = !x[2] ? x[1] : x[1] + '/' + x[2] +'/'+ x[3];
         });
     </script>
     <script>

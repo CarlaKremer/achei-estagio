@@ -35,7 +35,7 @@ public class Email {
         this.arquivo = arquivo;
     }
     
-        public InputStream getArquivo2() {
+    public InputStream getArquivo2() {
         return arquivo2;
     }
 
@@ -85,7 +85,7 @@ public class Email {
                 "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
-
+        
         Session s = Session.getInstance(props,new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication("achei.estagi@gmail.com", "7V9hkRh6kHV4Vc"); 
@@ -116,7 +116,6 @@ public class Email {
             arq2.setDataHandler(new DataHandler(ds2));
             arq2.setFileName("declaracao.pdf");
             
-            //mp.addBodyPart(messageBodyPart);
             //junta partes do email
             Multipart mp = new MimeMultipart();
             mp.addBodyPart(txt);
